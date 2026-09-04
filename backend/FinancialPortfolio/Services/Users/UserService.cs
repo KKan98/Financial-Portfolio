@@ -1,20 +1,21 @@
-﻿using FinancialPortfolio.Persistence.Users;
+﻿using FinancialPortfolio.Persistence.Roles;
+using FinancialPortfolio.Persistence.User;
 
 namespace FinancialPortfolio.Services.Users
 {
     public class UserService : IUserService
     {
-        public List<User> InMemoryUsers =
+        public List<User?> InMemoryUsers =
         [
-            new(){ Id = 1, Email = "user1@email.com", Password = "1" },
-            new(){ Id = 2, Email = "user2@email.com", Password = "2" },
-            new(){ Id = 3, Email = "user3@email.com", Password = "3" },
-            new(){ Id = 4, Email = "user4@email.com", Password = "4" }
+            new(){ Id = 1, Email = "user1@email.com", Password = "1", Role = Role.None},
+            new(){ Id = 2, Email = "user2@email.com", Password = "2", Role = Role.Administrator },
+            new(){ Id = 3, Email = "user3@email.com", Password = "3", Role = Role.Basic },
+            new(){ Id = 4, Email = "user4@email.com", Password = "4", Role = Role.Pro }
         ];
 
-        public List<User> GetUser(string email, string password)
+        public User GetUser(string email, string password)
         {
-            return InMemoryUsers.Where(x => x.Email == email && x.Password == password).ToList();
+            return InMemoryUsers.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FinancialPortfolio.Persistence.Users
+﻿using FinancialPortfolio.Persistence.Roles;
+
+namespace FinancialPortfolio.Persistence.User
 {
     public class User
     {
@@ -7,6 +9,8 @@
         public string Email { get; set; }
 
         public string Password { get; set; }
+
+        public Role Role { get; set; }
 
     }
 }

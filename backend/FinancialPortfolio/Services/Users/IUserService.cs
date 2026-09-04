@@ -1,9 +1,9 @@
-﻿using FinancialPortfolio.Persistence.Users;
+﻿using FinancialPortfolio.Persistence.User;
 
 namespace FinancialPortfolio.Services.Users
 {
     public interface IUserService
     {
-        public List<User> GetUser(string email, string password);
+        public User GetUser(string email, string password);
     }
 }

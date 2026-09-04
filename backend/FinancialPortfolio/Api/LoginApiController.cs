@@ -11,7 +11,7 @@ namespace FinancialPortfolio.Api
         public IActionResult Login(string email, string password)
         {
             var user = _userService.GetUser(email, password);
-            if (user.Count > 0) return Ok(user);
+            if (user != null) return Ok(user);
             return NotFound();
         }
     }
