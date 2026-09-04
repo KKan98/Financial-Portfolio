@@ -1,0 +1,6 @@
+# Visual Studio
+backend/FinancialPortfolio/.vs/
+
+# Build output
+backend/FinancialPortfolio/bin/
+backend/FinancialPortfolio/obj/
