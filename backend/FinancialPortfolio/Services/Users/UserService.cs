@@ -17,5 +17,16 @@ namespace FinancialPortfolio.Services.Users
         {
             return InMemoryUsers.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
+
+        public void AddUser(string email, string password, string role)
+        {
+            int id = InMemoryUsers.Count + 1;
+            InMemoryUsers.Add(new(){Id = id, Email = email, Password = password, Role = Enum.Parse<Role>(role)});
+        }
+
+        public List<User?> GetAllUsers()
+        {
+            return InMemoryUsers;
+        }
     }
 }
