@@ -19,7 +19,7 @@ namespace FinancialPortfolio.Api
             var user = _userService.GetUser(request.Email, request.Password);
             if (user == null)
             {
-                throw new Exception("User does not exist");
+                return Unauthorized("Invalid Credentials");
             }
 
             List<Claim> claims = new List<Claim>

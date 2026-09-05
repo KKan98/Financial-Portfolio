@@ -13,7 +13,7 @@ namespace FinancialPortfolio.Services.Users
             new(){ Id = 4, Email = "user4@email.com", Password = "4", Role = Role.Pro }
         ];
 
-        public User GetUser(string email, string password)
+        public User? GetUser(string email, string password)
         {
             return InMemoryUsers.FirstOrDefault(x => x.Email == email && x.Password == password);
         }
