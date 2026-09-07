@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { LoginResponse } from './loginResponse.model';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -9,7 +10,10 @@ import { AuthService } from './auth.service';
   templateUrl: './auth.html',
 })
 export class Auth {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private destroyRef: DestroyRef
+  ) {}
 
   form = new FormGroup({
     email: new FormControl(''),
@@ -21,7 +25,11 @@ export class Auth {
     const enteredPassword = this.form.value.password;
 
     if(typeof enteredEmail === 'string' && typeof enteredPassword === 'string') {
-      this.authService.login(enteredEmail, enteredPassword);
+      const subscription = this.authService.login({email: enteredEmail, password: enteredPassword}).subscribe({
+        next: (token: LoginResponse) => console.log(token)
+      });
+
+      this.destroyRef.onDestroy(() => subscription.unsubscribe())
     } else {
       console.log("Enter E-mail and Password");
     }
