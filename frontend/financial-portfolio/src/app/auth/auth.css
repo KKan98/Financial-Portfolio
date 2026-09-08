@@ -1,5 +1,6 @@
 .auth-page {
-  min-height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,4 +18,19 @@
   border-radius: 0.75rem;
   padding: 2rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.control-error {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #c52e2e;
+  height: 0.5rem;
+  padding: 0.25rem 0 0 0;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.control-error p {
+  margin: 0;
 }
