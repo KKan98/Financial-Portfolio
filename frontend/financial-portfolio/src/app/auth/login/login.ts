@@ -1,7 +1,7 @@
-import { Component, DestroyRef } from '@angular/core';
+import { Component, DestroyRef, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginService } from './login.service';
 import { LoginResponse } from './loginResponse.model';
+import { AuthService } from '../auth.service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -11,9 +11,11 @@ import { LoginResponse } from './loginResponse.model';
 })
 export class Login {
   constructor(
-    private loginService: LoginService,
+    private authService: AuthService,
     private destroyRef: DestroyRef
   ) {}
+
+  errorMessage = signal('');
 
   form = new FormGroup({
     email: new FormControl('', {
@@ -24,38 +26,26 @@ export class Login {
       validators: [Validators.required]
     })
   })
-
-  get emailIsInvalid() {
-    return (
-      this.form.controls.email.invalid &&
-      this.form.controls.email.touched &&
-      this.form.controls.email.dirty
-    )
-  }
-
-  get passwordIsInvalid() {
-    return (
-      this.form.controls.password.invalid &&
-      this.form.controls.password.touched &&
-      this.form.controls.password.dirty
-    )
-  }
   
   onSubmit() {
-    const enteredEmail = this.form.value.email;
-    const enteredPassword = this.form.value.password;
+    const enteredEmail = this.form.value.email ?? '';
+    const enteredPassword = this.form.value.password ?? '';
 
-    if(typeof enteredEmail === 'string' && typeof enteredPassword === 'string') {
-      const subscription = this.loginService.login({email: enteredEmail, password: enteredPassword}).subscribe({
+    if(this.form.valid) {
+      const subscription = this.authService.login({
+        email: enteredEmail, 
+        password: enteredPassword
+      }).subscribe({
         next: (token: LoginResponse) => {
-          console.log(token);
           localStorage.setItem('jwt', JSON.stringify(token));
-        }
+          this.errorMessage.set('');
+        },
+        error: (err: Error) => this.errorMessage.set(err.message)
       });
 
       this.destroyRef.onDestroy(() => subscription.unsubscribe())
     } else {
-      console.log("Enter E-mail and Password");
+      this.errorMessage.set("Enter correct E-mail and Password");
     }
   }
 }

@@ -12,9 +12,9 @@ namespace FinancialPortfolio.Services.AuthService
             return false;
         }
 
-        public Role GetUserRole(string email, string password)
+        public Role? GetUserRole(string email, string password)
         {
-            var userRole = _userService.GetUser(email, password).Role;
+            var userRole = _userService.GetUser(email, password)?.Role;
             return userRole;
         }
     }

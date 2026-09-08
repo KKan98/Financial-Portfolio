@@ -4,20 +4,56 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1.75rem;
 }
 
 .login-card {
-  max-width: 420px;
+  max-width: 440px;
   width: 100%;
 }
 
 .login-form {
-  background: #fff;
-  border: 1px solid #dee2e6;
-  border-radius: 0.75rem;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e1decf;
+  border-radius: 1rem;
   padding: 2rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+.login-form::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 0.35rem;
+  border-radius: 1rem 1rem 0 0;
+  background: linear-gradient(90deg, #f0d465, #f3bf22);
+}
+
+.login-form .form-label {
+  color: #344054;
+  font-weight: 600;
+}
+
+.login-form .form-control {
+  border-radius: 0.65rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.login-form .form-control:focus {
+  border-color: #facc15;
+  box-shadow: 0 0 0 0.2rem rgba(234, 179, 8, 0.24);
+}
+
+.login-form .btn-primary {
+  min-width: 120px;
+  font-weight: 600;
+}
+
+.request-error {
+  margin-top: 0.85rem;
+  margin-bottom: 0;
+  color: #b42318;
+  font-weight: 500;
 }
 
 .control-error {
@@ -33,4 +69,26 @@
 
 .control-error p {
   margin: 0;
+}
+
+[formgroupname].ng-invalid.ng-touched.ng-dirty label,
+.control:has(.ng-invalid.ng-touched.ng-dirty) label {
+  color: #f98b75;
+}
+
+[formgroupname].ng-invalid.ng-touched.ng-dirty input,
+input.ng-invalid.ng-touched.ng-dirty {
+  background-color: #fbdcd6;
+  border-color: #f84e2c;
+}
+
+@media (max-width: 575.98px) {
+  .login-page {
+    padding: 1rem;
+  }
+
+  .login-form {
+    padding: 1.5rem;
+    border-radius: 0.85rem;
+  }
 }

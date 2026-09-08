@@ -10,7 +10,7 @@ namespace FinancialPortfolio.Api
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginApiController(IUserService _userService, IConfiguration _configuration) : ControllerBase
+    public class AuthApiController(IUserService _userService, IConfiguration _configuration) : ControllerBase
     {
         [HttpPost("login")]
         [AllowAnonymous]
@@ -45,9 +45,9 @@ namespace FinancialPortfolio.Api
             return Ok(jwt);
         }
 
-        [Authorize(Roles = "Administrator")]
-        [HttpPost("addUser")]
-        public IActionResult AddUser([FromBody] AddUserRequest request)
+        [HttpPost("signup")]
+        [AllowAnonymous]
+        public IActionResult SingUp([FromBody] SignUpRequest request)
         {
             _userService.AddUser(request.Email, request.Password, request.Role);
             var users = _userService.GetAllUsers();
@@ -57,5 +57,5 @@ namespace FinancialPortfolio.Api
 
     public record LoginRequest(string Email, string Password);
 
-    public record AddUserRequest(string Email, string Password, string Role);
+    public record SignUpRequest(string Email, string Password, string Role);
 }

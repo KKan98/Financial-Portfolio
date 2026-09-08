@@ -12,15 +12,9 @@
       <div class="d-flex gap-2 flex-wrap">
         <button class="btn btn-primary" type="submit">Login</button>
       </div>
-
-    @if (emailIsInvalid) {
-      <p class="control-error">Your emails address is invalid.</p>
-    }
-
-    @if (passwordIsInvalid) {
-      <p class="control-error">Your password address is invalid.</p>
-    }
-    
+      @if (errorMessage()) {
+        <p class="request-error">{{ errorMessage() }}</p>
+      }
     </form>
   </div>
 </div>
