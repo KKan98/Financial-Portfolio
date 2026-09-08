@@ -1,4 +1,4 @@
-.auth-page {
+.login-page {
   min-height: 100%;
   box-sizing: border-box;
   display: flex;
@@ -7,12 +7,12 @@
   padding: 1.5rem;
 }
 
-.auth-card {
+.login-card {
   max-width: 420px;
   width: 100%;
 }
 
-.auth-form {
+.login-form {
   background: #fff;
   border: 1px solid #dee2e6;
   border-radius: 0.75rem;

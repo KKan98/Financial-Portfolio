@@ -1,18 +1,17 @@
 import { Component, DestroyRef } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
+import { LoginService } from './login.service';
 import { LoginResponse } from './loginResponse.model';
-import { required } from '@angular/forms/signals';
 
 @Component({
   imports: [ReactiveFormsModule],
-  selector: 'app-auth',
-  styleUrl: './auth.css',
-  templateUrl: './auth.html',
+  selector: 'app-login',
+  styleUrl: './login.css',
+  templateUrl: './login.html',
 })
-export class Auth {
+export class Login {
   constructor(
-    private authService: AuthService,
+    private loginService: LoginService,
     private destroyRef: DestroyRef
   ) {}
 
@@ -47,7 +46,7 @@ export class Auth {
     const enteredPassword = this.form.value.password;
 
     if(typeof enteredEmail === 'string' && typeof enteredPassword === 'string') {
-      const subscription = this.authService.login({email: enteredEmail, password: enteredPassword}).subscribe({
+      const subscription = this.loginService.login({email: enteredEmail, password: enteredPassword}).subscribe({
         next: (token: LoginResponse) => {
           console.log(token);
           localStorage.setItem('jwt', JSON.stringify(token));

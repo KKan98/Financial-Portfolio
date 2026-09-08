@@ -5,7 +5,7 @@ import { Login } from "./login.model";
 import { LoginResponse } from "./loginResponse.model";
 
 @Service()
-export class AuthService {
+export class LoginService {
   private httpClient = inject(HttpClient);
   private readonly loginUrl = "https://localhost:44359/api/LoginApi/login";
 
