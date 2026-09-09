@@ -2,7 +2,6 @@
 using System.Security.Claims;
 using System.Text;
 using FinancialPortfolio.Persistence.Login;
-using FinancialPortfolio.Persistence.Roles;
 using FinancialPortfolio.Persistence.User;
 using FinancialPortfolio.Services.Users;
 using Microsoft.AspNetCore.Authorization;
@@ -17,7 +16,7 @@ namespace FinancialPortfolio.Api
     {
         [HttpPost("login")]
         [AllowAnonymous]
-        public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
+        public ActionResult<LoginResponseDto> Login([FromBody] LoginRequest request)
         {
             var user = _userService.GetUser(request.Email, request.Password);
             if (user == null)
@@ -35,17 +34,20 @@ namespace FinancialPortfolio.Api
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            var expiresUTC = DateTime.UtcNow.AddMinutes(5);
+
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(5),
+                expires: expiresUTC,
                 signingCredentials: credentials
             );
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(new LoginResponse(jwt));
+            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeMilliseconds();
+            return Ok(new LoginResponseDto(user.Id, user.Email, user.Role, jwt, expiresUnixEpoch));
         }
 
         [HttpPost("signup")]

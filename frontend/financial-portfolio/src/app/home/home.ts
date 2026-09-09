@@ -1,5 +1,6 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { Role } from '../auth/role.model';
 
 @Component({
   imports: [],
@@ -31,5 +32,5 @@ export type UsersModel = {
   id: number,
   email: string,
   password: string,
-  role: 'None' | 'Basic' | 'Pro' | 'Administratorr'
+  role: Role
 }

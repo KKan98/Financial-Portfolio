@@ -9,8 +9,7 @@ namespace FinancialPortfolio.Services.Users
         [
             new(){ Id = 1, Email = "user1@email.com", Password = "1", Role = Role.None},
             new(){ Id = 2, Email = "user2@email.com", Password = "2", Role = Role.Administrator },
-            new(){ Id = 3, Email = "user3@email.com", Password = "3", Role = Role.Basic },
-            new(){ Id = 4, Email = "user4@email.com", Password = "4", Role = Role.Pro }
+            new(){ Id = 3, Email = "user3@email.com", Password = "3", Role = Role.Basic }
         ];
 
         public User? GetUser(string email, string password)

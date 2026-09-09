@@ -4,7 +4,6 @@
     {
         None,
         Administrator,
-        Basic,
-        Pro
+        Basic
     }
 }

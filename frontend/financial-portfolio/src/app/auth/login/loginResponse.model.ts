@@ -1,3 +1,9 @@
+import { Role } from "../role.model"
+
 export type LoginResponse = {
-  jwt: string
+  id: string,
+  email: string,
+  role: Role,
+  jwt: string,
+  expiresAt: number
 }

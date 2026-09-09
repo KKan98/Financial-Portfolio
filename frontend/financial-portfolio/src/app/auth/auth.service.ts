@@ -1,9 +1,11 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { inject, Service } from "@angular/core";
-import { catchError, throwError } from "rxjs";
+import { afterNextRender, inject, Service, signal } from "@angular/core";
+import { catchError, tap, throwError } from "rxjs";
 import { LoginModel } from "./login/login.model";
 import { LoginResponse } from "./login/loginResponse.model";
 import { SignupModel } from "./signup/signup.model";
+import { Role } from "./role.model";
+import { User } from "./user.model";
 
 @Service()
 export class AuthService {
@@ -11,12 +13,16 @@ export class AuthService {
   private readonly loginUrl = "https://localhost:44359/api/AuthApi/login";
   private readonly signupUrl = "https://localhost:44359/api/AuthApi/signup"
 
+  user = signal<User | null>(null);
+  
+
   login(login: LoginModel) {
     return this.httpClient.post<LoginResponse>(this.loginUrl, {
       email: login.email,
       password: login.password
     }).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError),
+      tap(respData => this.handleAuthentication(respData))
     )
   }
 
@@ -47,6 +53,19 @@ export class AuthService {
   private handleError(errorRes: HttpErrorResponse) {
     return throwError(() => new Error(`${errorRes.error} (status ${errorRes.status})`))
   } 
+
+  private handleAuthentication(respData: LoginResponse) {
+    const user = new User(
+          respData.id,
+          respData.email,
+          respData.role,
+          respData.jwt,
+          respData.expiresAt
+        );
+        this.user.set(user);
+        console.log(user);
+        
+  }
 }
 
 
@@ -54,5 +73,5 @@ type UsersModel = {
   id: number,
   email: string,
   password: string,
-  role: 'None' | 'Basic' | 'Pro' | 'Administratorr'
+  role: Role
 }
