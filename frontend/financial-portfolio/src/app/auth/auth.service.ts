@@ -16,9 +16,7 @@ export class AuthService {
       email: login.email,
       password: login.password
     }).pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => new Error(`${err.error} (status: ${err.status})`));
-      })
+      catchError(this.handleError)
     )
   }
 
@@ -28,17 +26,13 @@ export class AuthService {
       password: signup.password,
       role: signup.role
     }).pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => new Error(`${err.error} (status ${err.status})`))
-      })
+      catchError(this.handleError)
     )
   }
 
   getAllUsers() {
     return this.httpClient.get<UsersModel[]>("https://localhost:44359/api/AuthApi").pipe(
-      catchError((err: HttpErrorResponse) => {
-        return throwError(() => new Error(`${err.error} (status ${err.status})`))
-      })
+      catchError(this.handleError)
      )
   }
   
@@ -49,6 +43,10 @@ export class AuthService {
     const parsedToken = JSON.parse(token) as LoginResponse;
     return parsedToken.jwt;
   }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    return throwError(() => new Error(`${errorRes.error} (status ${errorRes.status})`))
+  } 
 }
 
 
