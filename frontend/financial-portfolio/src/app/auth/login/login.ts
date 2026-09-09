@@ -2,6 +2,7 @@ import { Component, DestroyRef, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginResponse } from './loginResponse.model';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -12,7 +13,8 @@ import { AuthService } from '../auth.service';
 export class Login {
   constructor(
     private authService: AuthService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private router: Router
   ) {}
 
   errorMessage = signal('');
@@ -38,7 +40,10 @@ export class Login {
       }).subscribe({
         next: (token: LoginResponse) => {
           localStorage.setItem('jwt', JSON.stringify(token));
+          console.log(token);
+          
           this.errorMessage.set('');
+          this.router.navigate(['']);
         },
         error: (err: Error) => this.errorMessage.set(err.message)
       });

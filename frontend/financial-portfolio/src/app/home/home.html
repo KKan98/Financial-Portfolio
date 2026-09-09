@@ -1,1 +1,10 @@
-<p>home works!</p>
+@if (users()) {
+  @for (user of users(); track user.id) {
+    <p>{{ user.id }}</p>
+    <p>{{ user.email }}</p>
+    <p>{{ user.password }}</p>
+    <p>{{ user.role }}</p>
+  }
+} @else {
+  <p>{{ errorMessage() }}</p>
+}

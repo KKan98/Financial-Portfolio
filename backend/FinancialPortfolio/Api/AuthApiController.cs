@@ -1,6 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using FinancialPortfolio.Persistence.Login;
+using FinancialPortfolio.Persistence.Roles;
+using FinancialPortfolio.Persistence.User;
 using FinancialPortfolio.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +17,7 @@ namespace FinancialPortfolio.Api
     {
         [HttpPost("login")]
         [AllowAnonymous]
-        public IActionResult Login([FromBody] LoginRequest request)
+        public ActionResult<LoginResponse> Login([FromBody] LoginRequest request)
         {
             var user = _userService.GetUser(request.Email, request.Password);
             if (user == null)
@@ -42,7 +45,7 @@ namespace FinancialPortfolio.Api
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(jwt);
+            return Ok(new LoginResponse(jwt));
         }
 
         [HttpPost("signup")]
@@ -50,8 +53,14 @@ namespace FinancialPortfolio.Api
         public IActionResult SingUp([FromBody] SignUpRequest request)
         {
             _userService.AddUser(request.Email, request.Password, request.Role);
-            var users = _userService.GetAllUsers();
-            return Ok(users);
+            return Ok();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        public List<User?> GetAllUsers()
+        {
+            return _userService.GetAllUsers();
         }
     }
 
