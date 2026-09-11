@@ -62,9 +62,7 @@ export class AuthService {
           respData.jwt,
           respData.expiresAt
         );
-        this.user.set(user);
-        console.log(user);
-        
+      this.user.set(user);       
   }
 }
 

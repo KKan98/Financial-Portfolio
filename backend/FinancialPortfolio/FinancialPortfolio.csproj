@@ -11,4 +11,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinancialPortfolio.Application\FinancialPortfolio.Application.csproj" />
+    <ProjectReference Include="..\FinancialPortfolio.Domain\FinancialPortfolio.Domain.csproj" />
+    <ProjectReference Include="..\FinancialPortfolio.Infrastructure\FinancialPortfolio.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

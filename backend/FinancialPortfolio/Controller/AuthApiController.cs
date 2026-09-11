@@ -1,18 +1,19 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using FinancialPortfolio.Persistence.Login;
-using FinancialPortfolio.Persistence.User;
-using FinancialPortfolio.Services.Users;
+using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Application.DTOs.Login;
+using FinancialPortfolio.Application.DTOs.SignUp;
+using FinancialPortfolio.Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FinancialPortfolio.Api
+namespace FinancialPortfolio.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthApiController(IUserService _userService, IConfiguration _configuration) : ControllerBase
+    public class AuthApiController(IUserRepository _userService, IConfiguration _configuration) : ControllerBase
     {
         [HttpPost("login")]
         [AllowAnonymous]
@@ -46,13 +47,13 @@ namespace FinancialPortfolio.Api
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeMilliseconds();
+            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeSeconds();
             return Ok(new LoginResponseDto(user.Id, user.Email, user.Role, jwt, expiresUnixEpoch));
         }
 
         [HttpPost("signup")]
         [AllowAnonymous]
-        public IActionResult SingUp([FromBody] SignUpRequest request)
+        public IActionResult SignUp([FromBody] SignUpRequest request)
         {
             _userService.AddUser(request.Email, request.Password, request.Role);
             return Ok();
@@ -65,8 +66,4 @@ namespace FinancialPortfolio.Api
             return _userService.GetAllUsers();
         }
     }
-
-    public record LoginRequest(string Email, string Password);
-
-    public record SignUpRequest(string Email, string Password, string Role);
 }

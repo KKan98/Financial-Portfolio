@@ -1,6 +1,6 @@
-﻿using FinancialPortfolio.Persistence.Roles;
+﻿using FinancialPortfolio.Domain.Enums.Roles;
 
-namespace FinancialPortfolio.Persistence.User
+namespace FinancialPortfolio.Domain.Entities.User
 {
     public class User
     {

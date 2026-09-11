@@ -1,8 +1,8 @@
-﻿using FinancialPortfolio.Persistence.User;
+﻿using FinancialPortfolio.Domain.Entities.User;
 
-namespace FinancialPortfolio.Services.Users
+namespace FinancialPortfolio.Application.Abstractions
 {
-    public interface IUserService
+    public interface IUserRepository
     {
         public User? GetUser(string email, string password);
         public void AddUser(string email, string password, string role);

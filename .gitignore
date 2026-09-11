@@ -4,3 +4,9 @@ backend/.vs/
 # Build output
 backend/FinancialPortfolio/bin/
 backend/FinancialPortfolio/obj/
+backend/FinancialPortfolio.Application/bin/
+backend/FinancialPortfolio.Application/obj/
+backend/FinancialPortfolio.Domain/bin/
+backend/FinancialPortfolio.Domain/obj/
+backend/FinancialPortfolio.Infrastructure/bin/
+backend/FinancialPortfolio.Infrastructure/obj/

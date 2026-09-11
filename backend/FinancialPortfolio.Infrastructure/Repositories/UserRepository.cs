@@ -1,9 +1,10 @@
-﻿using FinancialPortfolio.Persistence.Roles;
-using FinancialPortfolio.Persistence.User;
+﻿using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Domain.Entities.User;
+using FinancialPortfolio.Domain.Enums.Roles;
 
-namespace FinancialPortfolio.Services.Users
+namespace FinancialPortfolio.Infrastructure.Repositories
 {
-    public class UserService : IUserService
+    public class UserRepository : IUserRepository
     {
         public List<User?> InMemoryUsers =
         [
