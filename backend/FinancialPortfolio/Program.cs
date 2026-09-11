@@ -1,8 +1,8 @@
+using FinancialPortfolio.Extensions;
+using FinancialPortfolio.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using FinancialPortfolio.Extensions;
-using FinancialPortfolio.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +22,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenWithAuth();
 
-builder.Services.AddInfrastructure();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(jwtOptions =>
@@ -65,3 +65,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
