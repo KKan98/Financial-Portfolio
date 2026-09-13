@@ -4,8 +4,8 @@ namespace FinancialPortfolio.Application.Abstractions
 {
     public interface IUserRepository
     {
-        public User? GetUser(string email, string password);
-        public void AddUser(string email, string password, string role);
-        public List<User?> GetAllUsers();
+        public Task<User?> GetUserAsync(string email, string password, CancellationToken token);
+        public Task AddUserAsync(string email, string password, string role, CancellationToken token);
+        public Task<List<User>> GetAllUsersAsync(CancellationToken token);
     }
 }

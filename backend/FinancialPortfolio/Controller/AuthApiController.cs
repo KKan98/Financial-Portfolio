@@ -1,69 +1,45 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using FinancialPortfolio.Application.Abstractions;
+﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.DTOs.Login;
 using FinancialPortfolio.Application.DTOs.SignUp;
 using FinancialPortfolio.Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace FinancialPortfolio.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthApiController(IUserRepository _userService, IConfiguration _configuration) : ControllerBase
+    public class AuthApiController(IUserRepository _userService, IJwtService _jwtService) : ControllerBase
     {
+
         [HttpPost("login")]
         [AllowAnonymous]
-        public ActionResult<LoginResponseDto> Login([FromBody] LoginRequest request)
+        public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequest request, CancellationToken ct)
         {
-            var user = _userService.GetUser(request.Email, request.Password);
+            var user = await _userService.GetUserAsync(request.Email, request.Password, ct);
             if (user == null)
             {
                 return Unauthorized("Invalid Credentials");
             }
 
-            List<Claim> claims = new List<Claim>
-            {
-                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new(ClaimTypes.Email, user.Email),
-                new(ClaimTypes.Role, user.Role.ToString())
-            };
+            var accessToken = _jwtService.CreateJWT(user);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
-            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var expiresUTC = DateTime.UtcNow.AddMinutes(5);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
-                claims: claims,
-                expires: expiresUTC,
-                signingCredentials: credentials
-            );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeSeconds();
-            return Ok(new LoginResponseDto(user.Id, user.Email, user.Role, jwt, expiresUnixEpoch));
+            return Ok(new LoginResponseDto(user.Id, user.Email, user.Role, accessToken.Jwt, accessToken.ExpiresUnixEpoch));
         }
 
         [HttpPost("signup")]
         [AllowAnonymous]
-        public IActionResult SignUp([FromBody] SignUpRequest request)
+        public async Task<IActionResult> SignUp([FromBody] SignUpRequest request, CancellationToken ct)
         {
-            _userService.AddUser(request.Email, request.Password, request.Role);
+            await _userService.AddUserAsync(request.Email, request.Password, request.Role, ct);
             return Ok();
         }
 
         [Authorize(Roles = "Administrator")]
         [HttpGet]
-        public List<User?> GetAllUsers()
+        public Task<List<User>> GetAllUsers(CancellationToken ct)
         {
-            return _userService.GetAllUsers();
+            return _userService.GetAllUsersAsync(ct);
         }
     }
 }

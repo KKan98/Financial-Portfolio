@@ -1,32 +1,40 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Domain.Entities.User;
 using FinancialPortfolio.Domain.Enums.Roles;
+using FinancialPortfolio.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinancialPortfolio.Infrastructure.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(DatabaseContext _dbContext) : IUserRepository
     {
-        public List<User?> InMemoryUsers =
-        [
-            new(){ Id = 1, Email = "user1@email.com", Password = "1", Role = Role.None},
-            new(){ Id = 2, Email = "user2@email.com", Password = "2", Role = Role.Administrator },
-            new(){ Id = 3, Email = "user3@email.com", Password = "3", Role = Role.Basic }
-        ];
-
-        public User? GetUser(string email, string password)
+        public async Task<User?> GetUserAsync(string email, string password, CancellationToken token)
         {
-            return InMemoryUsers.FirstOrDefault(x => x.Email == email && x.Password == password);
+            var user = await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email == email && x.Password == password, token);
+
+            return user;
         }
 
-        public void AddUser(string email, string password, string role)
+        public async Task AddUserAsync(string email, string password, string role, CancellationToken token)
         {
-            int id = InMemoryUsers.Count + 1;
-            InMemoryUsers.Add(new(){Id = id, Email = email, Password = password, Role = Enum.Parse<Role>(role)});
+            var user = new User
+            {
+                Email = email,
+                Password = password, //TODO: HASH IT
+                Role = Enum.Parse<Role>(role)
+            };
+
+            _dbContext.Users.Add(user);
+            await _dbContext.SaveChangesAsync(token);
         }
 
-        public List<User?> GetAllUsers()
+        public Task<List<User>> GetAllUsersAsync(CancellationToken token)
         {
-            return InMemoryUsers;
+            return _dbContext.Users
+                .AsNoTracking()
+                .ToListAsync(token);
         }
     }
 }

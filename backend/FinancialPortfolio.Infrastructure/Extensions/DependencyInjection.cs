@@ -1,5 +1,8 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Infrastructure.Context;
 using FinancialPortfolio.Infrastructure.Repositories;
+using FinancialPortfolio.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,9 +18,10 @@ namespace FinancialPortfolio.Infrastructure.Extensions
                 throw new InvalidOperationException("The connection string DefaultConnection has not been initialized.");
             }
 
-            services.AddNpgsqlDataSource(connectionString);
+            services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IJwtService, JwtService>();
 
             return services;
         }
