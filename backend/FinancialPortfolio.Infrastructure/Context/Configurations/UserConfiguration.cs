@@ -13,6 +13,7 @@ namespace FinancialPortfolio.Infrastructure.Context.Configurations
             builder.HasKey(user => user.Id);
 
             builder.Property(user => user.Email)
+                .HasMaxLength(100)
                 .IsRequired();
 
             builder.Property(user => user.Password)
