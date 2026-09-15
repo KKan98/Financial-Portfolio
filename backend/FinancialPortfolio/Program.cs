@@ -1,8 +1,8 @@
-using FinancialPortfolio.Extensions;
 using FinancialPortfolio.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FinancialPortfolio.Presentation.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

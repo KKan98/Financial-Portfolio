@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialPortfolio", "FinancialPortfolio\FinancialPortfolio.csproj", "{03CA717B-2B9B-43B4-93F5-54A4070AB87B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialPortfolio.Presentation", "FinancialPortfolio\FinancialPortfolio.Presentation.csproj", "{03CA717B-2B9B-43B4-93F5-54A4070AB87B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A9BD4AC8-D13A-4A99-9594-1E21B385B889} = {A9BD4AC8-D13A-4A99-9594-1E21B385B889}
 		{D92D48EF-FBB7-4DBC-91B0-AD896C2980D3} = {D92D48EF-FBB7-4DBC-91B0-AD896C2980D3}

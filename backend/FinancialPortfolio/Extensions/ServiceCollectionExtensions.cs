@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 
-namespace FinancialPortfolio.Extensions
+namespace FinancialPortfolio.Presentation.Extensions
 {
     public static class ServiceCollectionExtensions
     {

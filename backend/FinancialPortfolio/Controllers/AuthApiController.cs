@@ -5,7 +5,7 @@ using FinancialPortfolio.Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinancialPortfolio.Controller
+namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
