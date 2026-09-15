@@ -1,17 +1,16 @@
 ﻿using System.Security.Cryptography;
-using FinancialPortfolio.Domain.Entities.User;
-using Microsoft.AspNetCore.Identity;
+using FinancialPortfolio.Application.Abstractions;
 
 namespace FinancialPortfolio.Infrastructure.Services
 {
-    public sealed class Pbkdf2PasswordHasher : IPasswordHasher<User>
+    public sealed class Pbkdf2PasswordHasher : IPasswordHasher
     {
         private const int SaltSize = 16;
         private const int HashSize = 32;
         private const int Iterations = 100000;
         private static readonly HashAlgorithmName Algorithm = HashAlgorithmName.SHA512;
 
-        public string HashPassword(User user, string password)
+        public string HashPassword(string password)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
             byte[] hash = Rfc2898DeriveBytes.Pbkdf2(password, salt, Iterations, Algorithm, HashSize);
@@ -19,14 +18,11 @@ namespace FinancialPortfolio.Infrastructure.Services
             return $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
         }
 
-        public PasswordVerificationResult VerifyHashedPassword(User user, string hashedPassword, string providedPassword)
+        public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
             string[] parts = hashedPassword.Split('-');
 
-            if (parts.Length != 2)
-            {
-                return PasswordVerificationResult.Failed;
-            }
+            if (parts.Length != 2) return false;
 
             try
             {
@@ -35,14 +31,12 @@ namespace FinancialPortfolio.Infrastructure.Services
 
                 var inputHash = Rfc2898DeriveBytes.Pbkdf2(providedPassword, salt, Iterations, Algorithm, HashSize);
 
-                return CryptographicOperations.FixedTimeEquals(inputHash, hash)
-                    ? PasswordVerificationResult.Success
-                    : PasswordVerificationResult.Failed;
+                return CryptographicOperations.FixedTimeEquals(inputHash, hash);
             }
             catch (FormatException e)
             {
                 Console.WriteLine(e); //TODO: Log it
-                return PasswordVerificationResult.Failed;
+                return false;
 
             }
         }

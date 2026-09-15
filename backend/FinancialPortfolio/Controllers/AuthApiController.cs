@@ -1,6 +1,7 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.DTOs.Login;
 using FinancialPortfolio.Application.DTOs.SignUp;
+using FinancialPortfolio.Application.Handlers.Login;
 using FinancialPortfolio.Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,22 +10,18 @@ namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthApiController(IUserRepository _userService, IJwtService _jwtService) : ControllerBase
+    public class AuthApiController(IUserRepository _userService, IJwtService _jwtService, ILoginUserHandler _loginUserHandler) : ControllerBase
     {
 
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequest request, CancellationToken ct)
         {
-            var user = await _userService.GetUserAsync(request.Email, request.Password, ct);
-            if (user == null)
-            {
-                return Unauthorized("Invalid Credentials");
-            }
+            var response = await _loginUserHandler.HandleAsync(request, ct);
 
-            var accessToken = _jwtService.CreateJWT(user);
-
-            return Ok(new LoginResponseDto(user.Id, user.Email, user.Role, accessToken.Jwt, accessToken.ExpiresUnixEpoch));
+            return response is null ? 
+                Unauthorized("Invalid Credentials") : 
+                Ok(response);
         }
 
         [HttpPost("signup")]

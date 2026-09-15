@@ -9,17 +9,13 @@ namespace FinancialPortfolio.Infrastructure.Repositories
 {
     public class UserRepository(DatabaseContext _dbContext, IPasswordHasher<User> _passwordHasher) : IUserRepository
     {
-        public async Task<User?> GetUserAsync(string email, string password, CancellationToken token)
+        public async Task<User?> GetUserAsync(string email, CancellationToken token)
         {
             var user = await _dbContext.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Email == email, token);
 
-            if (user is null) return null;
-
-            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, password);
-
-            return result == PasswordVerificationResult.Success ? user : null;
+            return user;
         }
 
         public async Task AddUserAsync(string email, string password, string role, CancellationToken token)

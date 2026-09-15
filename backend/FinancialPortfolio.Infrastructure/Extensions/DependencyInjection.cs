@@ -1,9 +1,7 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Domain.Entities.User;
 using FinancialPortfolio.Infrastructure.Context;
 using FinancialPortfolio.Infrastructure.Repositories;
 using FinancialPortfolio.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +22,7 @@ namespace FinancialPortfolio.Infrastructure.Extensions
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IJwtService, JwtService>();
-            services.AddSingleton<IPasswordHasher<User>, Pbkdf2PasswordHasher>();
+            services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 
             return services;
         }
