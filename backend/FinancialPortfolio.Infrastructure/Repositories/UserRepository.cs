@@ -1,51 +1,47 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Domain.Entities.User;
-using FinancialPortfolio.Domain.Enums.Roles;
 using FinancialPortfolio.Infrastructure.Context;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 
 namespace FinancialPortfolio.Infrastructure.Repositories
 {
-    public class UserRepository(DatabaseContext _dbContext, IPasswordHasher<User> _passwordHasher) : IUserRepository
+    public class UserRepository(DatabaseContext dbContext) : IUserRepository
     {
         public async Task<User?> GetUserAsync(string email, CancellationToken token)
         {
-            var user = await _dbContext.Users
+            var user = await dbContext.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Email == email, token);
 
             return user;
-        }
+        }   
 
-        public async Task AddUserAsync(string email, string password, string role, CancellationToken token)
+        public async Task<bool> AddUserAsync(User user, CancellationToken token)
         {
-            if (await DoesUserExist(email, token)) throw new Exception("User already exist.");
+            dbContext.Users.Add(user);
 
-            var user = new User
+            try
             {
-                Email = email,
-                Role = Enum.Parse<Role>(role)
-            };
-
-            string hashedPassword = _passwordHasher.HashPassword(user, password);
-
-            user.Password = hashedPassword;
-
-            _dbContext.Users.Add(user);
-            await _dbContext.SaveChangesAsync(token);
+                await dbContext.SaveChangesAsync(token);
+                return true;
+            }
+            catch (DbUpdateException e) when (e.InnerException is PostgresException { SqlState: PostgresErrorCodes.UniqueViolation })
+            {
+                return false;
+            }
         }
 
         public Task<List<User>> GetAllUsersAsync(CancellationToken token)
         {
-            return _dbContext.Users
+            return dbContext.Users
                 .AsNoTracking()
                 .ToListAsync(token);
         }
 
-        private Task<bool> DoesUserExist(string email, CancellationToken token)
+        public Task<bool> DoesUserExistAsync(string email, CancellationToken token)
         {
-            return _dbContext.Users.AnyAsync(x => x.Email == email, token);
+            return dbContext.Users.AnyAsync(x => x.Email == email, token);
         }
     }
 }

@@ -9,7 +9,7 @@ using FinancialPortfolio.Application.DTOs.Auth;
 
 namespace FinancialPortfolio.Infrastructure.Services
 {
-    public class JwtService(IConfiguration _configuration) : IJwtService
+    public class JwtService(IConfiguration configuration) : IJwtService
     {
         public AccessTokenDto CreateJWT(User user)
         {
@@ -20,14 +20,14 @@ namespace FinancialPortfolio.Infrastructure.Services
                 new(ClaimTypes.Role, user.Role.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var expiresUTC = DateTime.UtcNow.AddMinutes(5);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
+                issuer: configuration["JWT:Issuer"],
+                audience: configuration["JWT:Audience"],
                 claims: claims,
                 expires: expiresUTC,
                 signingCredentials: credentials
