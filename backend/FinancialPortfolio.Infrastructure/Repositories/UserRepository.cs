@@ -32,13 +32,6 @@ namespace FinancialPortfolio.Infrastructure.Repositories
             }
         }
 
-        public Task<List<User>> GetAllUsersAsync(CancellationToken token)
-        {
-            return dbContext.Users
-                .AsNoTracking()
-                .ToListAsync(token);
-        }
-
         public Task<bool> DoesUserExistAsync(string email, CancellationToken token)
         {
             return dbContext.Users.AnyAsync(x => x.Email == email, token);

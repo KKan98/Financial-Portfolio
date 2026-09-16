@@ -39,12 +39,5 @@ namespace FinancialPortfolio.Presentation.Controllers
                     title: "User already exist"
                 );
         }
-
-        [Authorize(Roles = "Administrator")]
-        [HttpGet]
-        public Task<List<User>> GetAllUsers(CancellationToken ct)
-        {
-            return userService.GetAllUsersAsync(ct);
-        }
     }
 }

@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Role } from '../role.model';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -21,19 +22,29 @@ export class Signup {
       validators: [Validators.required, Validators.email]
     }
     ),
-    password: new FormControl('', {
+    passwords: new FormGroup({
+      password: new FormControl('', {
+        validators: [Validators.required]
+      }),
+      confirmPassword: new FormControl('', {
+        validators: [Validators.required]
+      })
+    }),
+    role: new FormControl<Role>(Role.Basic, {
       validators: [Validators.required]
     }),
-    role: new FormControl<'Basic' | 'Pro' | 'Administrator'>('Basic', {
-      validators: [Validators.required]
-    }),
-  })
+  });
 
   onSubmit() {
     const enteredEmail = this.form.value.email ?? '';
-    const enteredPassword = this.form.value.password ?? '';
-    const enteredRole = this.form.value.role ?? 'None';
-    if(this.form.valid) {
+    const enteredPassword = this.form.value.passwords?.password ?? '';
+    const enteredConfirmPassword = this.form.value.passwords?.confirmPassword ?? '';
+    const enteredRole = this.form.value.role ?? Role.None;
+    if(this.form.valid &&
+       enteredPassword === enteredConfirmPassword &&
+       enteredConfirmPassword !== '' &&
+       enteredPassword !== ''
+      ) {
       const subscription = this.authService.signup({
         email: enteredEmail,
         password: enteredPassword,

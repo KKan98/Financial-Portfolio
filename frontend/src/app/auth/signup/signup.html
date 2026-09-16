@@ -5,15 +5,20 @@
         <label for="email" class="form-label">E-mail</label>
         <input type="email" id="email" class="form-control" formControlName="email"/>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" class="form-control" formControlName="password"/>
+      <div formGroupName="passwords">
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password"/>
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
+        </div>
       </div>
       <div class="mb-3">
         <label for="role-select" class="form-label">Role</label>
         <select name="role" id="role-select" class="form-select" formControlName="role">
           <option value="Basic">Basic</option>
-          <option value="Pro">Pro</option>
           <option value="Administrator">Administrator</option>
         </select>
       </div>  

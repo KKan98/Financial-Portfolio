@@ -8,26 +8,40 @@
     </ul>
 
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          role="button"
-          style="cursor: pointer;"
-          [routerLink]="['login']"
-        >
-          Login
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="nav-link"
-          role="button"
-          style="cursor: pointer;"
-          [routerLink]="['signup']"
-        >
-          Sign Up
-        </a>
-      </li>
+      @if (!isAuthenticated()) {
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            role="button"
+            style="cursor: pointer;"
+            [routerLink]="['login']"
+          >
+            Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            role="button"
+            style="cursor: pointer;"
+            [routerLink]="['signup']"
+          >
+            Sign Up
+          </a>
+        </li>
+      } @else {
+         <li class="nav-item">
+          <a
+            class="nav-link"
+            role="button"
+            style="cursor: pointer;"
+            [routerLink]="['login']"
+            (click)="onLogout()"
+          >
+            Logout
+          </a>
+        </li>
+      }
     </ul>
   </div>
 </nav>

@@ -1,15 +1,17 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { afterNextRender, inject, Service, signal } from "@angular/core";
+import { inject, Service, signal } from "@angular/core";
 import { catchError, tap, throwError } from "rxjs";
 import { LoginModel } from "./login/login.model";
 import { LoginResponse } from "./login/loginResponse.model";
 import { SignupModel } from "./signup/signup.model";
-import { Role } from "./role.model";
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 @Service()
 export class AuthService {
   private httpClient = inject(HttpClient);
+  private router = inject(Router);
+
   private readonly loginUrl = "https://localhost:44359/api/AuthApi/login";
   private readonly signupUrl = "https://localhost:44359/api/AuthApi/signup"
 
@@ -36,10 +38,10 @@ export class AuthService {
     )
   }
 
-  getAllUsers() {
-    return this.httpClient.get<UsersModel[]>("https://localhost:44359/api/AuthApi").pipe(
-      catchError(this.handleError)
-     )
+  logout() {
+    this.user.set(null);
+    this.clearToken();
+    this.router.navigate(['/login']);
   }
   
   getToken() : string | null {
@@ -48,6 +50,14 @@ export class AuthService {
 
     const parsedToken = JSON.parse(token) as LoginResponse;
     return parsedToken.jwt;
+  }
+
+  setToken(token: LoginResponse) : void {
+    localStorage.setItem('jwt', JSON.stringify(token));
+  }
+
+  clearToken() {
+    localStorage.removeItem('jwt');
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -64,12 +74,4 @@ export class AuthService {
         );
       this.user.set(user);       
   }
-}
-
-
-type UsersModel = {
-  id: number,
-  email: string,
-  password: string,
-  role: Role
 }

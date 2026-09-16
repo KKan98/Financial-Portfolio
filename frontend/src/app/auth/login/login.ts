@@ -39,8 +39,7 @@ export class Login {
         password: enteredPassword
       }).subscribe({
         next: (token: LoginResponse) => {
-          localStorage.setItem('jwt', JSON.stringify(token));
-          console.log(token);
+          this.authService.setToken(token);
           
           this.errorMessage.set('');
           this.router.navigate(['']);

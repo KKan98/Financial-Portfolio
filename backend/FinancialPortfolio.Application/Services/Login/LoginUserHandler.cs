@@ -3,16 +3,16 @@ using FinancialPortfolio.Application.DTOs.Login;
 
 namespace FinancialPortfolio.Application.Services.Login
 {
-    internal sealed class LoginUserHandler(IUserRepository _userRepository, IPasswordHasher _passwordHasher, IJwtService _jwtService) : ILoginUserHandler
+    internal sealed class LoginUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IJwtService _jwtService) : ILoginUserHandler
     {
         public async Task<LoginResponseDto?> HandleAsync(LoginRequestDto requestDto ,CancellationToken token)
         {
-            var user = await _userRepository.GetUserAsync(requestDto.Email, token);
+            var user = await userRepository.GetUserAsync(requestDto.Email, token);
 
             //dummy hash to ALWAYS do VerifyHashedPassword so there is no response time difference
             var userHash = user?.Password ?? IPasswordHasher.dummyHash; 
 
-            var isPasswordVerified = _passwordHasher.VerifyHashedPassword(userHash, requestDto.Password);
+            var isPasswordVerified = passwordHasher.VerifyHashedPassword(userHash, requestDto.Password);
 
             if (user is null && !isPasswordVerified) return null;
 
@@ -23,7 +23,8 @@ namespace FinancialPortfolio.Application.Services.Login
                 user.Email,
                 user.Role,
                 accessToken.Jwt,
-                accessToken.ExpiresUnixEpoch);
+                accessToken.ExpiresUnixEpoch
+                );
         }
     }
 }
