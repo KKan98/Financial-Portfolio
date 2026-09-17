@@ -6,12 +6,14 @@ import { LoginResponse } from "./login/loginResponse.model";
 import { SignupModel } from "./signup/signup.model";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
+import { Role } from "./role.model";
 
 @Service()
 export class AuthService {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
+  private readonly AUTH_TOKEN_KEY = "financial_portfolio_user_data";
   private readonly loginUrl = "https://localhost:44359/api/AuthApi/login";
   private readonly signupUrl = "https://localhost:44359/api/AuthApi/signup"
 
@@ -28,6 +30,28 @@ export class AuthService {
     )
   }
 
+  autoLogin() {
+    const userData : {
+      id: string,
+      email: string,
+      role: Role,
+      _token: string,
+      _expiresAt: string
+    } = this.getUserData();
+
+    if(!userData) return;
+
+    const loadedUser = new User(
+      userData.id,
+      userData.email,
+      userData.role,
+      userData._token,
+      new Date(userData._expiresAt)
+    )
+
+    if(loadedUser.token) this.user.set(loadedUser);
+  }
+
   signup(signup: SignupModel) {
     return this.httpClient.post(this.signupUrl, {
       email: signup.email,
@@ -40,24 +64,24 @@ export class AuthService {
 
   logout() {
     this.user.set(null);
-    this.clearToken();
+    this.clearUserData();
     this.router.navigate(['/login']);
   }
   
-  getToken() : string | null {
-    const token = localStorage.getItem('jwt');
+  getUserData() {
+    const token = localStorage.getItem(this.AUTH_TOKEN_KEY);
     if(!token) return null;
 
-    const parsedToken = JSON.parse(token) as LoginResponse;
-    return parsedToken.jwt;
+    const parsedToken = JSON.parse(token);
+    return parsedToken;
   }
 
-  setToken(token: LoginResponse) : void {
-    localStorage.setItem('jwt', JSON.stringify(token));
+  setUserData(userData: User) : void {
+    localStorage.setItem(this.AUTH_TOKEN_KEY, JSON.stringify(userData));
   }
 
-  clearToken() {
-    localStorage.removeItem('jwt');
+  clearUserData() {
+    localStorage.removeItem(this.AUTH_TOKEN_KEY);
   }
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -70,8 +94,9 @@ export class AuthService {
           respData.email,
           respData.role,
           respData.jwt,
-          respData.expiresAt
+          new Date(respData.expiresAt)
         );
-      this.user.set(user);       
+      this.user.set(user);     
+      this.setUserData(user);
   }
 }

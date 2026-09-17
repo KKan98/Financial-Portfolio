@@ -34,7 +34,7 @@ namespace FinancialPortfolio.Infrastructure.Services
             );
 
 
-            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeSeconds();
+            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeMilliseconds();
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 

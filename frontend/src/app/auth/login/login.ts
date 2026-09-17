@@ -38,9 +38,7 @@ export class Login {
         email: enteredEmail, 
         password: enteredPassword
       }).subscribe({
-        next: (token: LoginResponse) => {
-          this.authService.setToken(token);
-          
+        next: () => {
           this.errorMessage.set('');
           this.router.navigate(['']);
         },
