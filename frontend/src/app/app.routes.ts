@@ -2,11 +2,13 @@ import { Routes } from '@angular/router';
 import { Home } from './home/home';
 import { Login } from './auth/login/login';
 import { Signup } from './auth/signup/signup';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    canActivate: [authGuard]
   },
   {
     path: 'login',
@@ -15,5 +17,9 @@ export const routes: Routes = [
   {
     path: 'signup',
     component: Signup
+  },
+  {
+    path: '**',
+    component: Login
   }
 ];

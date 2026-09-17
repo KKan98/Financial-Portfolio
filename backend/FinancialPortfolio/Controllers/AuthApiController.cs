@@ -3,7 +3,6 @@ using FinancialPortfolio.Application.DTOs.Login;
 using FinancialPortfolio.Application.DTOs.SignUp;
 using FinancialPortfolio.Application.Services.Login;
 using FinancialPortfolio.Application.Services.SignUp;
-using FinancialPortfolio.Domain.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

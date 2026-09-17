@@ -14,7 +14,7 @@ namespace FinancialPortfolio.Application.Services.Login
 
             var isPasswordVerified = passwordHasher.VerifyHashedPassword(userHash, requestDto.Password);
 
-            if (user is null && !isPasswordVerified) return null;
+            if (user is null || !isPasswordVerified) return null;
 
             var accessToken = _jwtService.CreateJWT(user);
 
