@@ -23,7 +23,7 @@ namespace FinancialPortfolio.Infrastructure.Services
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var expiresUTC = DateTime.UtcNow.AddMinutes(5);
+            var expiresUTC = DateTime.UtcNow.AddMinutes(30);
 
             var token = new JwtSecurityToken(
                 issuer: configuration["JWT:Issuer"],
@@ -34,7 +34,7 @@ namespace FinancialPortfolio.Infrastructure.Services
             );
 
 
-            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeMilliseconds();
+            var expiresUnixEpoch = new DateTimeOffset(expiresUTC).ToUnixTimeSeconds();
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 

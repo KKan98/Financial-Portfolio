@@ -13,6 +13,7 @@ export class AuthService {
   private httpClient = inject(HttpClient);
   private router = inject(Router);
 
+  private tokenExpirationTimer: any;
   private readonly AUTH_TOKEN_KEY = "financial_portfolio_user_data";
   private readonly loginUrl = "https://localhost:44359/api/AuthApi/login";
   private readonly signupUrl = "https://localhost:44359/api/AuthApi/signup"
@@ -49,7 +50,11 @@ export class AuthService {
       new Date(userData._expiresAt)
     )
 
-    if(loadedUser.token) this.user.set(loadedUser);
+    if(loadedUser.token) {
+      this.user.set(loadedUser);
+      const expirationDuration = this.calculateExpirationDuration(new Date(userData._expiresAt).getTime());
+      this.autoLogout(expirationDuration);
+    }
   }
 
   signup(signup: SignupModel) {
@@ -66,6 +71,22 @@ export class AuthService {
     this.user.set(null);
     this.clearUserData();
     this.router.navigate(['/login']);
+
+    if(this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+
+    this.tokenExpirationTimer = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    if(this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, Math.max(expirationDuration, 0));
   }
   
   getUserData() {
@@ -89,14 +110,29 @@ export class AuthService {
   } 
 
   private handleAuthentication(respData: LoginResponse) {
+    const expiresAtMs = this.toMiliseconds(respData.expiresAt);
     const user = new User(
           respData.id,
           respData.email,
           respData.role,
           respData.jwt,
-          new Date(respData.expiresAt)
+          new Date(expiresAtMs)
         );
       this.user.set(user);     
+      const expirationDuration = this.calculateExpirationDuration(expiresAtMs);
+      console.log(expirationDuration);
+      
+      this.autoLogout(expirationDuration);
       this.setUserData(user);
   }
+
+  private toMiliseconds(num: number) {
+   return num * 1000;
+  }
+
+  private calculateExpirationDuration(expiresAt: number) {
+    return expiresAt - Date.now();
+  }
 }
+
+

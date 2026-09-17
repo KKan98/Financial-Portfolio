@@ -5,5 +5,5 @@ export type LoginResponse = { //Duplicate type of User?
   email: string,
   role: Role,
   jwt: string,
-  expiresAt: string
+  expiresAt: number
 }

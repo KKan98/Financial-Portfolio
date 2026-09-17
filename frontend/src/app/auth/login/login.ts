@@ -1,6 +1,5 @@
 import { Component, DestroyRef, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginResponse } from './loginResponse.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
