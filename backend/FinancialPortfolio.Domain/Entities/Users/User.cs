@@ -1,6 +1,7 @@
-﻿using FinancialPortfolio.Domain.Enums.Roles;
+﻿using FinancialPortfolio.Domain.Entities.Wallets;
+using FinancialPortfolio.Domain.Enums.Roles;
 
-namespace FinancialPortfolio.Domain.Entities.User
+namespace FinancialPortfolio.Domain.Entities.Users
 {
     public class User
     {
@@ -11,6 +12,8 @@ namespace FinancialPortfolio.Domain.Entities.User
         public string Password { get; set; }
 
         public Role Role { get; set; }
+
+        public ICollection<Wallet> Wallets { get; } = new List<Wallet>();
 
     }
 }

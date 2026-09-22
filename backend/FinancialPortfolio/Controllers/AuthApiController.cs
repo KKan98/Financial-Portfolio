@@ -10,7 +10,7 @@ namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthApiController(IUserRepository userService, ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ControllerBase
+    public class AuthApiController(ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ControllerBase
     {
 
         [HttpPost("login")]

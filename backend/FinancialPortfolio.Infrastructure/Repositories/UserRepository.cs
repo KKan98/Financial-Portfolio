@@ -1,12 +1,12 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Domain.Entities.User;
+using FinancialPortfolio.Domain.Entities.Users;
 using FinancialPortfolio.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace FinancialPortfolio.Infrastructure.Repositories
 {
-    public class UserRepository(DatabaseContext dbContext) : IUserRepository
+    internal class UserRepository(DatabaseContext dbContext) : IUserRepository
     {
         public async Task<User?> GetUserAsync(string email, CancellationToken token)
         {

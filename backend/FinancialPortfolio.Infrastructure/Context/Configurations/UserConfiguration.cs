@@ -1,4 +1,4 @@
-﻿using FinancialPortfolio.Domain.Entities.User;
+﻿using FinancialPortfolio.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

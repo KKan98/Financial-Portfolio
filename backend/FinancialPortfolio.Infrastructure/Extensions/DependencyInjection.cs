@@ -21,6 +21,7 @@ namespace FinancialPortfolio.Infrastructure.Extensions
             services.AddDbContext<DatabaseContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IWalletRepository, WalletRepository>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 

@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Domain.Entities.User;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using FinancialPortfolio.Application.DTOs.Auth;
+using FinancialPortfolio.Domain.Entities.Users;
 
 namespace FinancialPortfolio.Infrastructure.Services
 {

@@ -1,6 +1,6 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.DTOs.SignUp;
-using FinancialPortfolio.Domain.Entities.User;
+using FinancialPortfolio.Domain.Entities.Users;
 using FinancialPortfolio.Domain.Enums.Roles;
 
 namespace FinancialPortfolio.Application.Services.SignUp
