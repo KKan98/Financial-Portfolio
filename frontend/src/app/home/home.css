@@ -1,0 +1,91 @@
+:host {
+	display: block;
+}
+
+.home-placeholder {
+	min-height: 70dvh;
+	display: grid;
+	place-items: center;
+	gap: 1rem;
+	text-align: center;
+	color: #252525;
+}
+
+.cat {
+	position: relative;
+	width: 6rem;
+	height: 5rem;
+	background: #252525;
+	border-radius: 3rem 3rem 2.6rem 2.6rem;
+	animation: bob 2.4s ease-in-out infinite;
+}
+
+.cat::before,
+.cat::after {
+	content: '';
+	position: absolute;
+	top: -0.75rem;
+	width: 1.2rem;
+	height: 1.2rem;
+	background: #252525;
+	transform: rotate(45deg);
+}
+
+.cat::before {
+	left: 1rem;
+}
+
+.cat::after {
+	right: 1rem;
+}
+
+.cat-eyes {
+	position: absolute;
+	top: 2rem;
+	left: 1.7rem;
+	width: 0.55rem;
+	height: 0.55rem;
+	border-radius: 50%;
+	background: #f7f7f7;
+	box-shadow: 2rem 0 0 #f7f7f7;
+	animation: blink 3s infinite;
+}
+
+.home-note {
+	margin: 0;
+	font-size: 0.9rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+@keyframes blink {
+	0%,
+	44%,
+	47%,
+	100% {
+		transform: scaleY(1);
+	}
+
+	45%,
+	46% {
+		transform: scaleY(0.15);
+	}
+}
+
+@keyframes bob {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-0.3rem);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cat,
+	.cat-eyes {
+		animation: none;
+	}
+}

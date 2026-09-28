@@ -3,11 +3,16 @@ import { Home } from './home/home';
 import { Login } from './auth/login/login';
 import { Signup } from './auth/signup/signup';
 import { authGuard } from './auth/auth.guard';
+import { Dashboard } from './portfolio/dashboard/dashboard';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    component: Home
+  },
+  {
+    path: 'dashboard',
+    component: Dashboard,
     canActivate: [authGuard]
   },
   {
