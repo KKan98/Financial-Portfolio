@@ -12,7 +12,8 @@ HttpHandlerFn) => {
   }
 
   const modifiedReq = req.clone({
-    headers: req.headers.set('Authorization', `Bearer ${userData.token}`),
+    headers: req.headers.set('Authorization', `Bearer ${userData._token}`),
   });
+  
   return next(modifiedReq);
 };

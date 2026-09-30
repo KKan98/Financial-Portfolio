@@ -39,7 +39,7 @@ export class Login {
       }).subscribe({
         next: () => {
           this.errorMessage.set('');
-          this.router.navigate(['']);
+          this.router.navigate(['dashboard']);
         },
         error: (err: Error) => this.errorMessage.set(err.message)
       });

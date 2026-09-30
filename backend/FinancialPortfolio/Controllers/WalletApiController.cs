@@ -20,7 +20,7 @@ namespace FinancialPortfolio.Presentation.Controllers
             return Ok(wallets);
         }
 
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> AddWallet([FromBody] string name, CancellationToken token)
         {
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);

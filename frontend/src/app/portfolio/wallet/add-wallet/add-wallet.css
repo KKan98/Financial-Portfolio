@@ -1,0 +1,89 @@
+:host {
+	display: block;
+}
+
+.add-wallet-dialog {
+	width: min(100%, 26rem);
+	padding: 1rem;
+	border-radius: 14px;
+	background: linear-gradient(165deg, #ffffff 0%, #f7f3e8 100%);
+}
+
+.dialog-title {
+	margin: 0;
+	color: #2b230f;
+	font-size: 1.35rem;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+.dialog-subtitle {
+	margin: 0.5rem 0 1.1rem;
+	color: #6d5a2e;
+	font-size: 0.95rem;
+}
+
+.wallet-form {
+	display: grid;
+	gap: 0.65rem;
+}
+
+.wallet-label {
+	color: #453914;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.wallet-input {
+	width: 100%;
+	border: 1px solid #d4c190;
+	border-radius: 10px;
+	padding: 0.72rem 0.85rem;
+	font-size: 0.96rem;
+	color: #33290f;
+	background: #fffdf7;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wallet-input::placeholder {
+	color: #9f8b5f;
+}
+
+.wallet-input:focus {
+	outline: none;
+	border-color: #be8f1e;
+	box-shadow: 0 0 0 3px rgba(190, 143, 30, 0.2);
+}
+
+.wallet-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.6rem;
+	margin-top: 0.45rem;
+}
+
+.btn {
+	border-radius: 8px;
+	font-weight: 600;
+	padding: 0.42rem 0.8rem;
+}
+
+.btn-primary {
+	background: #e9bc59;
+	color: #382a0c;
+	border: 1px solid #b18a36;
+}
+
+.btn-primary:hover {
+	filter: brightness(0.97);
+}
+
+.btn-secondary {
+	border: 1px solid #cfbf97;
+	background: #fffdf8;
+	color: #4c3d17;
+}
+
+.btn-secondary:hover {
+	background: #f7f0dd;
+}

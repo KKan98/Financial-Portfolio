@@ -1,5 +1,4 @@
-﻿using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Application.DTOs.Login;
+﻿using FinancialPortfolio.Application.DTOs.Login;
 using FinancialPortfolio.Application.DTOs.SignUp;
 using FinancialPortfolio.Application.Services.Login;
 using FinancialPortfolio.Application.Services.SignUp;

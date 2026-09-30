@@ -1,1 +1,3 @@
-<p>wallet works!</p>
+@for (wallet of wallets(); track wallet.id) {
+  <div> Name: {{ wallet.name }}</div>
+}

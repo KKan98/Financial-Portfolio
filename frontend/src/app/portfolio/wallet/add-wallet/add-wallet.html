@@ -1,0 +1,22 @@
+<section class="add-wallet-dialog" aria-label="Add wallet dialog">
+  <h2 class="dialog-title">Add Wallet</h2>
+  <p class="dialog-subtitle">Create a wallet to organize your funds.</p>
+
+  <form class="wallet-form" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <label class="wallet-label" for="name">Wallet name</label>
+    <input
+      id="name"
+      class="wallet-input"
+      formControlName="name"
+      placeholder="Interactive Brokers"
+    />
+
+    <div class="wallet-actions">
+      <button mat-button class="btn btn-primary" type="submit">Create Wallet</button>
+      <button mat-button class="btn btn-secondary" type="button" (click)="closeDialog()">Cancel</button>
+    </div>
+      @if (errorMessage()) {
+        <p class="request-error">{{ errorMessage() }}</p>
+      }
+  </form>
+</section>

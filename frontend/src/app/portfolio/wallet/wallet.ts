@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { WalletService } from './wallet.service';
 
 @Component({
   imports: [],
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './wallet.css',
   templateUrl: './wallet.html',
 })
-export class Wallet {}
+export class Wallet {
+  private walletService = inject(WalletService);
+
+  public readonly wallets = this.walletService.wallets;
+}
