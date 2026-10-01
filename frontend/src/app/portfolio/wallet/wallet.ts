@@ -9,6 +9,5 @@ import { WalletService } from './wallet.service';
 })
 export class Wallet {
   private walletService = inject(WalletService);
-
   public readonly wallets = this.walletService.wallets;
 }

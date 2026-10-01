@@ -19,9 +19,6 @@ export class Dashboard { //opening dashboard does not fetch, when on new user I 
       data: { name: this.name}
     })
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
-    })
+    dialogRef.afterClosed().subscribe();
   }
 }

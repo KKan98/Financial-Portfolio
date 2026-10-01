@@ -1,23 +1,35 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Service } from "@angular/core";
-import { catchError, throwError } from "rxjs";
+import { catchError, of, switchMap, throwError } from "rxjs";
 import { WalletModel } from "./wallet.model";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { toObservable, toSignal } from "@angular/core/rxjs-interop";
+import { AuthService } from "../../auth/auth.service";
 
 @Service()
 export class WalletService {
   private httpClient = inject(HttpClient);
+  private authService = inject(AuthService);
 
   private readonly getWalletsUrl = "https://localhost:44359/api/WalletApi"
   private readonly addWalletUrl = "https://localhost:44359/api/WalletApi/add"
 
-  public wallets = toSignal(this.get(), {
-    initialValue: []
-  });
+  public readonly wallets = toSignal(
+    toObservable(this.authService.user).pipe(
+      switchMap(user => {
+        if (!user?.token) {
+          return of<WalletModel[]>([]);
+        }
+
+        return this.get().pipe(
+          catchError(() => of<WalletModel[]>([]))
+        );
+      })
+    ),
+    { initialValue: [] }
+  )
 
   get() {
-    return this.httpClient.get<WalletModel[]>(this.getWalletsUrl)
-      .pipe(catchError(this.handleError));
+    return this.httpClient.get<WalletModel[]>(this.getWalletsUrl);
   }
 
   add(name: string) {

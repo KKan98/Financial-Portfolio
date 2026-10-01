@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { ɵInternalFormsSharedModule, ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { WalletService } from '../wallet.service';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
@@ -12,6 +13,7 @@ import { WalletService } from '../wallet.service';
 export class AddWallet {
   private dialogRef = inject(MatDialogRef<AddWallet>);
   private walletService = inject(WalletService);
+  private router = inject(Router);
 
   public errorMessage = signal('');
 
@@ -35,7 +37,10 @@ export class AddWallet {
       this.errorMessage.set('Wallet name cannot be empty!')
     } else {
       this.walletService.add(nameEntered).subscribe({
-        next: () => this.closeDialog(),
+        next: () => {
+          this.closeDialog();          
+          this.router.navigate(['dashboard']);
+        },
         error: (err: Error) => this.errorMessage.set(err.message)
       })
     }
