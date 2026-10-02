@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Service } from "@angular/core";
-import { catchError, of, switchMap, throwError } from "rxjs";
+import { catchError, of, Subject, switchMap, throwError, merge, tap } from "rxjs";
 import { WalletModel } from "./wallet.model";
 import { toObservable, toSignal } from "@angular/core/rxjs-interop";
 import { AuthService } from "../../auth/auth.service";
@@ -9,6 +9,7 @@ import { AuthService } from "../../auth/auth.service";
 export class WalletService {
   private httpClient = inject(HttpClient);
   private authService = inject(AuthService);
+  private readonly refresh$ = new Subject<void>();
 
   private readonly getWalletsUrl = "https://localhost:44359/api/WalletApi"
   private readonly addWalletUrl = "https://localhost:44359/api/WalletApi/add"
@@ -20,10 +21,15 @@ export class WalletService {
           return of<WalletModel[]>([]);
         }
 
-        return this.get().pipe(
-          catchError(() => of<WalletModel[]>([]))
-        );
+        return merge(
+          of(null),
+          this.refresh$).pipe(
+          switchMap(() => this.get().pipe(
+            catchError(() => of<WalletModel[]>([]))
+          ))
+        )
       })
+        
     ),
     { initialValue: [] }
   )
@@ -42,7 +48,10 @@ export class WalletService {
         }
       }
     )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap(() => this.refresh$.next())
+      );
   }
 
   private handleError(errorRes: HttpErrorResponse) {
