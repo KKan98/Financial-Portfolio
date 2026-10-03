@@ -7,5 +7,7 @@ namespace FinancialPortfolio.Application.Abstractions
         Task<List<WalletDto>> GetAsync(int userId, CancellationToken token);
 
         Task<bool> AddWalletAsync(int userId, string name, CancellationToken token);
+
+        Task<bool> FindWalletAsync(int userId, string name, CancellationToken token);
     }
 }

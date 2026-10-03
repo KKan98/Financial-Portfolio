@@ -55,6 +55,6 @@ export class WalletService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    return throwError(() => new Error(`${errorRes.error} (status ${errorRes.status})`))
+    return throwError(() => new Error(errorRes.error.detail))
   } 
 }

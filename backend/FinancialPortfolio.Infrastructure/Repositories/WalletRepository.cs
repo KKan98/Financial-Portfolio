@@ -41,5 +41,12 @@ namespace FinancialPortfolio.Infrastructure.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> FindWalletAsync(int userId, string name, CancellationToken token)
+        {
+            return await dbContext.Wallets
+                .AsNoTracking()
+                .AnyAsync(w => w.UserId == userId && w.Name == name, token);
+        }
     }
 }

@@ -120,7 +120,6 @@ export class AuthService {
         );
       this.user.set(user);     
       const expirationDuration = this.calculateExpirationDuration(expiresAtMs);
-      console.log(expirationDuration);
       
       this.autoLogout(expirationDuration);
       this.setUserData(user);
