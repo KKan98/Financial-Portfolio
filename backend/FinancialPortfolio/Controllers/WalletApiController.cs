@@ -2,19 +2,19 @@
 using FinancialPortfolio.Application.Services.Wallet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class WalletApiController(IWalletService walletService) : ControllerBase
+    public class WalletApiController(IWalletService walletService) : ApiControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<List<WalletDto>>> Get(CancellationToken token)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!); //unguarded, read about User from ClaimsPrincipal
+            if (TryGetUserId(out int userId)) return Unauthorized(); //handle unauth on front?
+
             var wallets = await walletService.GetAsync(userId, token);
 
             return Ok(wallets);
@@ -23,7 +23,8 @@ namespace FinancialPortfolio.Presentation.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddWallet([FromBody] string name, CancellationToken token)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            if (!TryGetUserId(out int userId)) return Unauthorized();
+
             bool wasWalletAdded = await walletService.HandleAsync(userId, name, token);
 
             return wasWalletAdded
