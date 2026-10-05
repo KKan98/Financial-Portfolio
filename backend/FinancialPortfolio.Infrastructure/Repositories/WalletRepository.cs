@@ -16,7 +16,7 @@ namespace FinancialPortfolio.Infrastructure.Repositories
                 .Where(w => w.UserId == userId)
                 .Select(x => new WalletDto
                 {
-                    WalletId = x.Id,
+                    Id = x.Id,
                     Name = x.Name
                 }).ToListAsync(token);
 

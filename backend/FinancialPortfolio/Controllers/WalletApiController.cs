@@ -13,7 +13,7 @@ namespace FinancialPortfolio.Presentation.Controllers
         [HttpGet]
         public async Task<ActionResult<List<WalletDto>>> Get(CancellationToken token)
         {
-            if (TryGetUserId(out int userId)) return Unauthorized(); //handle unauth on front?
+            if (!TryGetUserId(out int userId)) return Unauthorized(); //handle unauth on front?
 
             var wallets = await walletService.GetAsync(userId, token);
 
@@ -21,11 +21,11 @@ namespace FinancialPortfolio.Presentation.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddWallet([FromBody] string name, CancellationToken token)
+        public async Task<IActionResult> AddWallet([FromBody] WalletRequestDto dto, CancellationToken token)
         {
             if (!TryGetUserId(out int userId)) return Unauthorized();
 
-            bool wasWalletAdded = await walletService.HandleAsync(userId, name, token);
+            bool wasWalletAdded = await walletService.HandleAsync(userId, dto.Name, token);
 
             return wasWalletAdded
                 ? Ok()

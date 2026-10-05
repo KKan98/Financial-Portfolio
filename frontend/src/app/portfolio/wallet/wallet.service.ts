@@ -27,7 +27,8 @@ export class WalletService {
           switchMap(() => this.get().pipe(
             catchError(() => of<WalletModel[]>([]))
           ))
-        )
+        ).pipe(tap(data => console.log(data)
+        ))
       })
         
     ),
@@ -39,15 +40,9 @@ export class WalletService {
   }
 
   add(name: string) {
-    return this.httpClient.post(
-      this.addWalletUrl,
-      JSON.stringify(name),
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
+    return this.httpClient.post(this.addWalletUrl, {
+      Name: name
+    })
       .pipe(
         catchError(this.handleError),
         tap(() => this.refresh$.next())
