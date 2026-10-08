@@ -1,3 +1,48 @@
-@for (wallet of wallets(); track wallet.id) {
-  <div> Name: {{ wallet.name }}</div>
-}
+<section class="wallet-overview" aria-label="Wallet overview">
+  <header class="wallet-overview__header">
+    <div>
+      <h2 class="wallet-overview__title">Your Wallets</h2>
+      <p class="wallet-overview__subtitle">
+        Organize assets by wallet and keep each balance in one place.
+      </p>
+    </div>
+
+    <div class="wallet-overview__meta" aria-live="polite">
+      <p class="wallet-overview__meta-label">Wallets</p>
+      <p class="wallet-overview__meta-value">{{ wallets().length }}</p>
+      <p class="wallet-overview__meta-note">Combined value updates as assets are added.</p>
+    </div>
+  </header>
+
+  @if (wallets().length === 0) {
+    <section class="wallet-empty" aria-label="No wallets yet">
+      <h3 class="wallet-empty__title">No wallets yet</h3>
+      <p class="wallet-empty__text">
+        Add your first wallet to start tracking where your assets are stored.
+      </p>
+    </section>
+  } @else {
+    <ul class="wallet-grid" role="list" aria-label="Wallet list">
+      @for (wallet of wallets(); track wallet.id || $index) {
+        <li class="wallet-card">
+          <article class="wallet-card__body" [attr.aria-label]="'Wallet ' + wallet.name">
+            <div class="wallet-card__head">
+              <h3 class="wallet-card__name">{{ wallet.name }}</h3>
+              <p class="wallet-card__id">ID: {{ wallet.id || 'Pending' }}</p>
+            </div>
+
+            <section class="wallet-card__assets" [attr.aria-label]="'Assets in ' + wallet.name">
+              <p class="wallet-card__assets-label">Assets</p>
+              <p class="wallet-card__assets-empty">No assets added yet.</p>
+            </section>
+
+            <div class="wallet-card__total" aria-label="Wallet total value">
+              <span>Total value</span>
+              <strong>$0.00</strong>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+  }
+</section>
