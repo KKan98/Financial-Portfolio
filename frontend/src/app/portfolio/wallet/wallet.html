@@ -27,7 +27,7 @@
   } @else {
     <ul class="wallet-grid" role="list" aria-label="Wallet list">
       @for (wallet of wallets(); track wallet.id || $index) {
-        <li class="wallet-card">
+        <li class="wallet-card" (click)="onClick(wallet.id, wallet.name)">
           <article class="wallet-card__body" [attr.aria-label]="'Wallet ' + wallet.name">
             <div class="wallet-card__head">
               <h3 class="wallet-card__name">{{ wallet.name }}</h3>

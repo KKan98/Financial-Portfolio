@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { inject, Service, signal } from "@angular/core";
 import { catchError, tap, throwError } from "rxjs";
 import { LoginModel } from "./login/login.model";
-import { LoginResponse } from "./login/loginResponse.model";
+import { LoginResponse } from "./login/login-response.model";
 import { SignupModel } from "./signup/signup.model";
 import { User } from "./user.model";
 import { Router } from "@angular/router";
