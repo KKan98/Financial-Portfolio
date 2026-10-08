@@ -2,15 +2,18 @@
   <header class="wallet-overview__header">
     <div>
       <h2 class="wallet-overview__title">Your Wallets</h2>
-      <p class="wallet-overview__subtitle">
-        Organize assets by wallet and keep each balance in one place.
-      </p>
     </div>
 
-    <div class="wallet-overview__meta" aria-live="polite">
-      <p class="wallet-overview__meta-label">Wallets</p>
-      <p class="wallet-overview__meta-value">{{ wallets().length }}</p>
-      <p class="wallet-overview__meta-note">Combined value updates as assets are added.</p>
+    <div class="wallet-overview__actions">
+      <button class="wallet-overview__add-btn" type="button" (click)="openDialog()">
+        Add New Wallet
+      </button>
+
+      <div class="wallet-overview__meta" aria-live="polite">
+        <p class="wallet-overview__meta-label">Wallets</p>
+        <p class="wallet-overview__meta-value">{{ wallets().length }}</p>
+        <p class="wallet-overview__meta-note">Combined value updates as assets are added.</p>
+      </div>
     </div>
   </header>
 

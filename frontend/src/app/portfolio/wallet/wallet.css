@@ -18,58 +18,87 @@
 .wallet-overview__header {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
-	gap: 0.9rem;
-	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.65rem;
+	flex-wrap: nowrap;
+}
+
+.wallet-overview__actions {
+	display: flex;
+	gap: 0.45rem;
+	align-items: stretch;
+	flex-shrink: 0;
+}
+
+.wallet-overview__add-btn {
+	border: 1px solid #ca9c3f;
+	border-radius: 10px;
+	padding: 0.48rem 0.8rem;
+	background: #e9bc59;
+	color: #3a2c0d;
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+	box-shadow: 0 4px 10px rgba(122, 93, 29, 0.2);
+	transition: filter 0.15s ease, box-shadow 0.15s ease;
+	white-space: nowrap;
+}
+
+.wallet-overview__add-btn:hover {
+	filter: brightness(0.98);
+	box-shadow: 0 6px 14px rgba(122, 93, 29, 0.22);
+}
+
+.wallet-overview__add-btn:focus-visible {
+	outline: 3px solid #6b4a00;
+	outline-offset: 3px;
 }
 
 .wallet-overview__title {
 	margin: 0;
 	color: #2b220d;
-	font-size: clamp(1.2rem, 1.4vw + 0.9rem, 1.55rem);
+	font-size: clamp(1.05rem, 1vw + 0.85rem, 1.3rem);
 	font-weight: 700;
 	letter-spacing: 0.01em;
 }
 
-.wallet-overview__subtitle {
-	margin: 0.35rem 0 0;
-	color: #5b4921;
-	font-size: 0.95rem;
-	max-width: 36ch;
-	line-height: 1.45;
-}
-
 .wallet-overview__meta {
-	min-width: 11.5rem;
-	padding: 0.7rem 0.8rem;
-	border-radius: 12px;
+	min-width: 10.5rem;
+	padding: 0.52rem 0.62rem;
+	border-radius: 10px;
 	background: rgba(255, 250, 238, 0.84);
 	border: 1px solid #d9c396;
 	text-align: right;
 }
 
+.wallet-overview__header > div:first-child {
+	flex: 1;
+	min-width: 0;
+}
+
 .wallet-overview__meta-label {
 	margin: 0;
 	color: #7b6634;
-	font-size: 0.78rem;
+	font-size: 0.72rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
 
 .wallet-overview__meta-value {
-	margin: 0.15rem 0;
+	margin: 0.08rem 0;
 	color: #3d2f0f;
-	font-size: 1.55rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 	line-height: 1.05;
 }
 
 .wallet-overview__meta-note {
 	margin: 0;
-	font-size: 0.8rem;
+	font-size: 0.73rem;
 	color: #705b2b;
-	line-height: 1.32;
+	line-height: 1.22;
 }
 
 .wallet-empty {
@@ -195,8 +224,21 @@
 		gap: 0.85rem;
 	}
 
+	.wallet-overview__header {
+		flex-wrap: wrap;
+	}
+
 	.wallet-overview__meta {
 		text-align: left;
+		width: 100%;
+	}
+
+	.wallet-overview__actions {
+		align-items: stretch;
+		width: 100%;
+	}
+
+	.wallet-overview__add-btn {
 		width: 100%;
 	}
 
