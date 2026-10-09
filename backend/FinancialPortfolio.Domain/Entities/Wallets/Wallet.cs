@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FinancialPortfolio.Domain.Entities.Assets;
 using FinancialPortfolio.Domain.Entities.Users;
 
 namespace FinancialPortfolio.Domain.Entities.Wallets
@@ -14,5 +15,7 @@ namespace FinancialPortfolio.Domain.Entities.Wallets
         public string Name { get; set; } = null!;
 
         public User User { get; set; } = null!;
+
+        public ICollection<Asset> Assets { get; } = new List<Asset>();
     }
 }

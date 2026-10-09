@@ -28,7 +28,7 @@ export class Wallet {
     dialogRef.afterClosed().subscribe();
   }
 
-  onClick(id: string ,name: string) {
+  onClick(id: string, name: string) {
     this.router.navigate(['wallet', id, name])
   }
 }

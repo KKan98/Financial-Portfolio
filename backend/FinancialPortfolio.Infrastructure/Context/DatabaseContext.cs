@@ -1,4 +1,5 @@
-﻿using FinancialPortfolio.Domain.Entities.Users;
+﻿using FinancialPortfolio.Domain.Entities.Assets;
+using FinancialPortfolio.Domain.Entities.Users;
 using FinancialPortfolio.Domain.Entities.Wallets;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ namespace FinancialPortfolio.Infrastructure.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<Asset> Assets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
