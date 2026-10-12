@@ -18,17 +18,23 @@ namespace FinancialPortfolio.Infrastructure.Context.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(a => a.Amount)
+            builder.Property(a => a.Quantity)
                 .HasPrecision(18, 4)
                 .IsRequired();
 
-            builder.Property(a => a.BuyingPrice)
-                .HasPrecision(18, 2);
+            builder.ComplexProperty(a => a.BuyingPrice, price =>
+            {
+                price.Property(m => m.Amount)
+                    .HasColumnName("BuyingPrice")
+                    .HasPrecision(18, 2)
+                    .IsRequired();
 
-            builder.Property(a => a.Currency)
-                .HasDefaultValue("EUR")
-                .HasMaxLength(5)
-                .IsRequired();
+                price.Property(m => m.Currency)
+                    .HasColumnName("Currency")
+                    .HasConversion<string>()
+                    .HasMaxLength(3)
+                    .IsRequired();
+            }); //Can be chained from EF11
 
             builder.Property(a => a.Timestamp)
                 .HasDefaultValueSql("now()");
@@ -37,8 +43,6 @@ namespace FinancialPortfolio.Infrastructure.Context.Configurations
                 .WithMany(w => w.Assets)
                 .HasForeignKey(a => a.WalletId)
                 .IsRequired();
-
-            builder.HasIndex(a => new { a.WalletId, a.Name }).IsUnique();
         }
     }
 }

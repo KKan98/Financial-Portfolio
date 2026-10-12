@@ -1,5 +1,5 @@
 ﻿using FinancialPortfolio.Domain.Entities.Wallets;
-using FinancialPortfolio.Domain.Enums.Roles;
+using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Domain.Entities.Users
 {

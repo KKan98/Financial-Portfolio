@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Domain.Entities.Wallets;
+using FinancialPortfolio.Domain.ValueObjects;
 
 namespace FinancialPortfolio.Domain.Entities.Assets
 {
@@ -6,15 +7,13 @@ namespace FinancialPortfolio.Domain.Entities.Assets
     {
         public Guid Id { get; set; }
 
-        public int WalletId { get; set; }
+        public required int WalletId { get; set; }
 
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public decimal Amount { get; set; }
+        public required decimal Quantity { get; set; }
 
-        public decimal BuyingPrice { get; set; }
-
-        public string Currency { get; set; }
+        public required Money BuyingPrice { get; set; }
 
         public DateTime Timestamp { get; set; }
 

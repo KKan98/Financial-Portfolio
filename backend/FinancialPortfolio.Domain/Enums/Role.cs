@@ -1,4 +1,4 @@
-﻿namespace FinancialPortfolio.Domain.Enums.Roles
+﻿namespace FinancialPortfolio.Domain.Enums
 {
     public enum Role
     {

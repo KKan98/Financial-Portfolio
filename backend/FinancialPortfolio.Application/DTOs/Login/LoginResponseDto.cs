@@ -1,4 +1,4 @@
-﻿using FinancialPortfolio.Domain.Enums.Roles;
+﻿using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Application.DTOs.Login
 {
