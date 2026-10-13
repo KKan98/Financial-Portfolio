@@ -9,12 +9,12 @@ namespace FinancialPortfolio.Infrastructure.Repositories
 {
     internal class WalletRepository(DatabaseContext dbContext) : IWalletRepository
     {
-        public async Task<List<WalletDto>> GetAsync(int userId, CancellationToken token)
+        public async Task<List<WalletResponseDto>> GetAsync(int userId, CancellationToken token)
         {
             var wallets = await dbContext.Wallets
                 .AsNoTracking()
                 .Where(w => w.UserId == userId)
-                .Select(x => new WalletDto
+                .Select(x => new WalletResponseDto
                 {
                     Id = x.Id,
                     Name = x.Name

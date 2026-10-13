@@ -11,7 +11,7 @@ namespace FinancialPortfolio.Presentation.Controllers
     public class WalletApiController(IWalletService walletService) : ApiControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<WalletDto>>> Get(CancellationToken token)
+        public async Task<ActionResult<List<WalletResponseDto>>> Get(CancellationToken token)
         {
             if (!TryGetUserId(out int userId)) return Unauthorized(); //handle unauth on front?
 

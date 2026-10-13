@@ -1,7 +1,7 @@
 ﻿
 namespace FinancialPortfolio.Application.DTOs.Wallet
 {
-    public record WalletDto
+    public record WalletResponseDto
     {
         public required int Id { get; init; }
 
