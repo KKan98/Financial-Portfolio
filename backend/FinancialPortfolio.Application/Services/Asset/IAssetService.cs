@@ -6,6 +6,6 @@ namespace FinancialPortfolio.Application.Services.Asset
     {
         Task<List<AssetGetResponseDto>> GetAsync(int userId, AssetGetRequestDto request, CancellationToken token);
 
-        Task<bool> HandleAsync(int userId, AssetAddRequestDto addRequest, CancellationToken token);
+        Task AddAsync(int userId, AssetAddRequestDto addRequest, CancellationToken token);
     }
 }

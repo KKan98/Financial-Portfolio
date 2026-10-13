@@ -11,10 +11,10 @@ namespace FinancialPortfolio.Application.Services.Asset
             return await assetRepository.GetAsync(request.WalletId, token);
         }
 
-        public async Task<bool> HandleAsync(int userId, AssetAddRequestDto request, CancellationToken token)
+        public async Task AddAsync(int userId, AssetAddRequestDto request, CancellationToken token)
         {
             //same question as above, right now its only passthrough
-            return await assetRepository.AddAsync(request, token);
+            await assetRepository.AddAsync(request, token);
         }
     }
 }

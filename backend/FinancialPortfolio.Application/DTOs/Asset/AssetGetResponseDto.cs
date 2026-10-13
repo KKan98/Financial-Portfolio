@@ -1,6 +1,6 @@
-﻿using FinancialPortfolio.Domain.ValueObjects;
+﻿using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Application.DTOs.Asset
 {
-    public record AssetGetResponseDto(string Name, decimal Quantity, Money BuyingPrice, DateTime Timestamp);
+    public record AssetGetResponseDto(string Name, decimal Quantity, decimal buyingPrice, Currency currency, DateTime Timestamp);
 }

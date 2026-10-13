@@ -14,11 +14,11 @@ namespace FinancialPortfolio.Infrastructure.Repositories
             return await dbContext.Assets
                 .AsNoTracking()
                 .Where(x => x.WalletId == walletId)
-                .Select(x => new AssetGetResponseDto(x.Name, x.Quantity, x.BuyingPrice, x.Timestamp))
+                .Select(x => new AssetGetResponseDto(x.Name, x.Quantity, x.BuyingPrice.Amount, x.BuyingPrice.Currency, x.Timestamp))
                 .ToListAsync(token);
         }
 
-        public async Task<bool> AddAsync(AssetAddRequestDto assetDto, CancellationToken token)
+        public async Task AddAsync(AssetAddRequestDto assetDto, CancellationToken token)
         {
             var asset = new Asset
             {
@@ -30,16 +30,7 @@ namespace FinancialPortfolio.Infrastructure.Repositories
 
             dbContext.Assets.Add(asset);
 
-            try
-            {
-                await dbContext.SaveChangesAsync(token);
-                return true;
-            }
-            catch
-            {
-                return false;
-
-            }
+            await dbContext.SaveChangesAsync(token);
         }
 
         public async Task DeleteAsync(Guid assetId, CancellationToken token)

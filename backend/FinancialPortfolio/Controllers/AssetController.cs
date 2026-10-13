@@ -1,15 +1,17 @@
 ﻿using FinancialPortfolio.Application.DTOs.Asset;
 using FinancialPortfolio.Application.Services.Asset;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AssetController(IAssetService assetService) : ApiControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Get([FromBody] AssetGetRequestDto request, CancellationToken token)
+        public async Task<IActionResult> Get([FromQuery] AssetGetRequestDto request, CancellationToken token)
         {
             if (!TryGetUserId(out var userId)) return Unauthorized();
 
@@ -18,17 +20,14 @@ namespace FinancialPortfolio.Presentation.Controllers
             return Ok(assets);
         }
 
+        [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] AssetAddRequestDto request, CancellationToken token)
         {
             if (!TryGetUserId(out var userId)) return Unauthorized();
 
-            return await assetService.HandleAsync(userId, request, token) ?
-                Ok() :
-                Problem(
-                    detail: "something went wrong...",
-                    statusCode: StatusCodes.Status500InternalServerError,
-                    title: "Error while adding to database."
-                    );
+            await assetService.AddAsync(userId, request, token);
+
+            return Ok();
         }
     }
 }

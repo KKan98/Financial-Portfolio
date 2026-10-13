@@ -6,7 +6,7 @@ namespace FinancialPortfolio.Application.Abstractions
     {
         Task<List<AssetGetResponseDto>> GetAsync(int walletId, CancellationToken token);
 
-        Task<bool> AddAsync(AssetAddRequestDto asset, CancellationToken token);
+        Task AddAsync(AssetAddRequestDto asset, CancellationToken token);
 
         Task DeleteAsync(Guid assetId, CancellationToken token);
     }
