@@ -15,8 +15,8 @@ export class AuthService {
 
   private tokenExpirationTimer: any;
   private readonly AUTH_TOKEN_KEY = "financial_portfolio_user_data";
-  private readonly loginUrl = "https://localhost:44359/api/AuthApi/login";
-  private readonly signupUrl = "https://localhost:44359/api/AuthApi/signup"
+  private readonly loginUrl = "https://localhost:44359/api/auth/login";
+  private readonly signupUrl = "https://localhost:44359/api/auth/signup"
 
   user = signal<User | null>(null);
   

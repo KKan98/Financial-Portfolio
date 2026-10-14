@@ -11,8 +11,8 @@ export class WalletService {
   private authService = inject(AuthService);
   private readonly refresh$ = new Subject<void>();
 
-  private readonly getWalletsUrl = "https://localhost:44359/api/WalletApi"
-  private readonly addWalletUrl = "https://localhost:44359/api/WalletApi/add"
+  private readonly getWalletsUrl = "https://localhost:44359/api/wallets"
+  private readonly addWalletUrl = "https://localhost:44359/api/wallets/add"
 
   public readonly wallets = toSignal(
     toObservable(this.authService.user).pipe(

@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialPortfolio.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/wallets")]
     [ApiController]
     [Authorize]
-    public class WalletApiController(IWalletService walletService) : ApiControllerBase
+    public class WalletController(IWalletService walletService) : ApiControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<List<WalletResponseDto>>> Get(CancellationToken token)

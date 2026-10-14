@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialPortfolio.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/assets")]
     [ApiController]
     [Authorize]
     public class AssetController(IAssetService assetService) : ApiControllerBase

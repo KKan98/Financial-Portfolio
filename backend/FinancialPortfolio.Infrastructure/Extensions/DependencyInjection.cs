@@ -23,6 +23,7 @@ namespace FinancialPortfolio.Infrastructure.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IWalletRepository, WalletRepository>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IAssetRepository, AssetRepository>();
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 
             return services;

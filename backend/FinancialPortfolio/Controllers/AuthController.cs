@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinancialPortfolio.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
-    public class AuthApiController(ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ControllerBase
+    public class AuthController(ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ControllerBase
     {
 
         [HttpPost("login")]
