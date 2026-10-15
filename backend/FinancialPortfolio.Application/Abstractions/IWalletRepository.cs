@@ -8,6 +8,8 @@ namespace FinancialPortfolio.Application.Abstractions
 
         Task<bool> AddWalletAsync(int userId, string name, CancellationToken token);
 
-        Task<bool> FindWalletAsync(int userId, string name, CancellationToken token);
+        Task<bool> ExistByNameAsync(int userId, string name, CancellationToken token);
+
+        Task<bool> ExistsForUserAsync(int userId, int walletId, CancellationToken token);
     }
 }

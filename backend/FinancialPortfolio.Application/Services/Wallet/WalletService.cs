@@ -12,7 +12,7 @@ namespace FinancialPortfolio.Application.Services.Wallet
 
         public async Task<bool> HandleAsync(int userId, string name, CancellationToken token)
         {
-            bool walletExists = await walletRepository.FindWalletAsync(userId, name, token);
+            bool walletExists = await walletRepository.ExistByNameAsync(userId, name, token);
 
             if (walletExists) return false;
 
