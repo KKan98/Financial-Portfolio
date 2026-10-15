@@ -10,8 +10,8 @@ namespace FinancialPortfolio.Presentation.Controllers
     [Authorize]
     public class AssetController(IAssetService assetService) : ApiControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] AssetGetRequestDto request, CancellationToken token)
+        [HttpGet("{walletId:int}")]
+        public async Task<IActionResult> Get([FromRoute] AssetGetRequestDto request, CancellationToken token)
         {
             if (!TryGetUserId(out var userId)) return Unauthorized();
 

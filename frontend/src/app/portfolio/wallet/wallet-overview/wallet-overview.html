@@ -1,1 +1,22 @@
-<p>wallet-overview works!</p>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">BuyingPrice</th>
+      <th scope="col">Currency</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (asset of assets(); track asset.id) {
+      <tr>
+        <th scope="row">{{ asset.name }}</th>
+        <th>{{ asset.quantity }}</th>
+        <th>{{ asset.buyingPrice }}</th>
+        <th>{{ asset.currency }}</th>
+        <th>{{ asset.timestamp }}</th>
+      </tr>
+    }    
+  </tbody>
+</table>

@@ -9,6 +9,7 @@ namespace FinancialPortfolio.Application.Services.Asset
         {
             if (!await walletRepository.ExistsForUserAsync(userId, request.WalletId, token))
             {
+                //result pattern instead of simple exception handling?
                 throw new UnauthorizedAccessException("Requested wallet does not belong to you.");
             }
 

@@ -2,5 +2,11 @@
 
 namespace FinancialPortfolio.Application.DTOs.Asset
 {
-    public record AssetGetResponseDto(string Name, decimal Quantity, decimal buyingPrice, Currency currency, DateTime Timestamp);
+    public record AssetGetResponseDto(
+        Guid Id,
+        string Name,
+        decimal Quantity,
+        decimal buyingPrice,
+        Currency currency,
+        DateTime Timestamp);
 }

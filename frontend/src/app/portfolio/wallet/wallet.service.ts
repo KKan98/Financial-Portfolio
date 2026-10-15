@@ -30,9 +30,7 @@ export class WalletService {
         ).pipe(tap(data => console.log(data)
         ))
       })
-        
-    ),
-    { initialValue: [] }
+    ), { initialValue: [] }
   )
 
   get() {

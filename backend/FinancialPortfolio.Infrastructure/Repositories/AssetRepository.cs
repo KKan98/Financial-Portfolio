@@ -14,7 +14,13 @@ namespace FinancialPortfolio.Infrastructure.Repositories
             return await dbContext.Assets
                 .AsNoTracking()
                 .Where(x => x.WalletId == walletId)
-                .Select(x => new AssetGetResponseDto(x.Name, x.Quantity, x.BuyingPrice.Amount, x.BuyingPrice.Currency, x.Timestamp))
+                .Select(x => new AssetGetResponseDto(
+                    x.Id,
+                    x.Name,
+                    x.Quantity,
+                    x.BuyingPrice.Amount,
+                    x.BuyingPrice.Currency,
+                    x.Timestamp))
                 .ToListAsync(token);
         }
 
