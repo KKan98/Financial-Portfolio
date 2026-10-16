@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Service } from "@angular/core";
 import { Asset, CreateAssetRequest } from "./asset.model";
-import { catchError, Subject, tap, throwError } from "rxjs";
+import { catchError, throwError } from "rxjs";
 
 @Service()
 export class AssetService {

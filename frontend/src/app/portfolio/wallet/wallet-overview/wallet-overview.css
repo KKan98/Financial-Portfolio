@@ -1,0 +1,60 @@
+﻿:host {
+	display: block;
+	padding: 1rem;
+}
+
+.assets {
+	padding: 1rem;
+	border: 1px solid #decba1;
+	border-radius: 14px;
+	background: #fffcf5;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+h2 {
+	margin: 0;
+	color: #2b220d;
+}
+
+header span,
+.empty {
+	color: #705b2b;
+}
+
+.empty {
+	margin: 0;
+	padding: 1.5rem;
+	text-align: center;
+}
+
+.table-container {
+	overflow-x: auto;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	color: #3d2f0f;
+}
+
+th,
+td {
+	padding: 0.75rem;
+	border-bottom: 1px solid #e4d2ab;
+	text-align: left;
+	white-space: nowrap;
+}
+
+thead {
+	background: #f9f1df;
+}
+
+tbody tr:hover {
+	background: #fff8e8;
+}

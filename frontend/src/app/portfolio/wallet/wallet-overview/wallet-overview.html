@@ -1,22 +1,35 @@
-<table>
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">BuyingPrice</th>
-      <th scope="col">Currency</th>
-      <th scope="col">Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (asset of assets(); track asset.id) {
-      <tr>
-        <th scope="row">{{ asset.name }}</th>
-        <th>{{ asset.quantity }}</th>
-        <th>{{ asset.buyingPrice }}</th>
-        <th>{{ asset.currency }}</th>
-        <th>{{ asset.timestamp }}</th>
-      </tr>
-    }    
-  </tbody>
-</table>
+﻿<section class="assets" aria-labelledby="assets-title">
+  <header>
+    <h2 id="assets-title">{{ walletName() }}</h2>
+    <span>{{ assets().length }} assets</span>
+  </header>
+
+  @if (assets().length === 0) {
+    <p class="empty">No assets yet.</p>
+  } @else {
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Buying price</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (asset of assets(); track asset.id) {
+            <tr>
+              <th scope="row">{{ asset.name }}</th>
+              <td>{{ asset.quantity | number: '1.0-8' }}</td>
+              <td>{{ asset.buyingPrice }}</td>
+              <td>{{ asset.currency }}</td>
+              <td>{{ asset.timestamp | date: 'short' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

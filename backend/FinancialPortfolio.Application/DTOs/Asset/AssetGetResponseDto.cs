@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Domain.Enums;
+using System.Text.Json.Serialization;
 
 namespace FinancialPortfolio.Application.DTOs.Asset
 {
@@ -7,6 +8,6 @@ namespace FinancialPortfolio.Application.DTOs.Asset
         string Name,
         decimal Quantity,
         decimal buyingPrice,
-        Currency currency,
+        [property: JsonConverter(typeof(JsonStringEnumConverter<Currency>))] Currency currency,
         DateTime Timestamp);
 }
