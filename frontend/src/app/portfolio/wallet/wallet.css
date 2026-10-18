@@ -163,38 +163,6 @@
 	word-break: break-word;
 }
 
-.wallet-card__id {
-	margin: 0;
-	color: #7b6332;
-	font-size: 0.78rem;
-	word-break: break-word;
-}
-
-.wallet-card__assets {
-	border: 1px dashed #d5be8f;
-	border-radius: 10px;
-	padding: 0.58rem 0.62rem;
-	background: rgba(255, 255, 255, 0.75);
-	display: grid;
-	gap: 0.22rem;
-}
-
-.wallet-card__assets-label {
-	margin: 0;
-	color: #6f5827;
-	font-size: 0.72rem;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-}
-
-.wallet-card__assets-empty {
-	margin: 0;
-	color: #4d3c15;
-	font-size: 0.86rem;
-	line-height: 1.35;
-}
-
 .wallet-card__total {
 	margin-top: auto;
 	display: flex;
