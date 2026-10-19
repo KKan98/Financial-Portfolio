@@ -2,8 +2,11 @@ using FinancialPortfolio.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.Extensions;
+using FinancialPortfolio.Infrastructure.MarketData.AlphaVantage;
 using FinancialPortfolio.Presentation.Extensions;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +19,10 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddOptions<AlphaVantageOptions>()
+    .Bind(builder.Configuration.GetSection(AlphaVantageOptions.Key))
+    .ValidateDataAnnotations();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -25,6 +32,13 @@ builder.Services.AddSwaggerGenWithAuth();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddHttpClient<IMarketDataProvider, AlphaVantageClient>(
+    (sp, client) =>
+    {
+        var options = sp.GetRequiredService<IOptions<AlphaVantageOptions>>().Value;
+        client.BaseAddress = new Uri(options.BaseUrl);
+    });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(jwtOptions =>
