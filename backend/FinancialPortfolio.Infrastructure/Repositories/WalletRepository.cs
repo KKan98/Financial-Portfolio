@@ -23,7 +23,7 @@ namespace FinancialPortfolio.Infrastructure.Repositories
             return wallets;
         }
 
-        public async Task<bool> AddWalletAsync(int userId, string name, CancellationToken token)
+        public async Task AddWalletAsync(int userId, string name, CancellationToken token)
         {
             dbContext.Wallets.Add(new Wallet
             {
@@ -34,11 +34,11 @@ namespace FinancialPortfolio.Infrastructure.Repositories
             try
             {
                 await dbContext.SaveChangesAsync(token);
-                return true;
             }
             catch (DbUpdateException e) when (e.InnerException is PostgresException { SqlState: PostgresErrorCodes.UniqueViolation })
             {
-                return false;
+                //log it
+                throw;
             }
         }
 

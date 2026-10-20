@@ -1,4 +1,5 @@
-﻿using FinancialPortfolio.Application.DTOs.Wallet;
+﻿using FinancialPortfolio.Application.Common;
+using FinancialPortfolio.Application.DTOs.Wallet;
 
 namespace FinancialPortfolio.Application.Services.Wallet
 {
@@ -6,6 +7,6 @@ namespace FinancialPortfolio.Application.Services.Wallet
     {
         Task<List<WalletResponseDto>> GetAsync(int userId, CancellationToken token);
 
-        Task<bool> HandleAsync(int userId, string name, CancellationToken token);
+        Task<Result> HandleAsync(int userId, string name, CancellationToken token);
     }
 }

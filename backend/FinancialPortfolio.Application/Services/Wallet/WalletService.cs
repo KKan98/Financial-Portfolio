@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Application.Common;
 using FinancialPortfolio.Application.DTOs.Wallet;
 
 namespace FinancialPortfolio.Application.Services.Wallet
@@ -10,13 +11,24 @@ namespace FinancialPortfolio.Application.Services.Wallet
             return walletRepository.GetAsync(userId, token);
         }
 
-        public async Task<bool> HandleAsync(int userId, string name, CancellationToken token)
+        public async Task<Result> HandleAsync(int userId, string name, CancellationToken token)
         {
-            bool walletExists = await walletRepository.ExistByNameAsync(userId, name, token);
+            try
+            {
+                bool walletExists = await walletRepository.ExistByNameAsync(userId, name, token);
 
-            if (walletExists) return false;
+                if (walletExists) return Errors.WalletAlreadyExists;
 
-            return await walletRepository.AddWalletAsync(userId, name, token);
+                await walletRepository.AddWalletAsync(userId, name, token);
+
+                return Result.Success();
+            }
+            catch(Exception ex)
+            {
+                //log ex
+                throw;
+            }
+
         }
     }
 }

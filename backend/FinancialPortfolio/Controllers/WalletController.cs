@@ -1,4 +1,5 @@
-﻿using FinancialPortfolio.Application.DTOs.Wallet;
+﻿using FinancialPortfolio.Application.Common;
+using FinancialPortfolio.Application.DTOs.Wallet;
 using FinancialPortfolio.Application.Services.Wallet;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,12 @@ namespace FinancialPortfolio.Presentation.Controllers
     public class WalletController(IWalletService walletService) : ApiControllerBase
     {
         [HttpGet]
-        public async Task<ActionResult<List<WalletResponseDto>>> Get(CancellationToken token)
+        public async Task<IActionResult> Get(CancellationToken token)
         {
-            if (!TryGetUserId(out int userId)) return Unauthorized(); //handle unauth on front?
+            var userIdResult = TryGetUserId();
+            if (userIdResult.IsFailure) return HandleFailure(userIdResult);
 
-            var wallets = await walletService.GetAsync(userId, token);
+            var wallets = await walletService.GetAsync(userIdResult.Value, token);
 
             return Ok(wallets);
         }
@@ -23,17 +25,14 @@ namespace FinancialPortfolio.Presentation.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddWallet([FromBody] WalletRequestDto dto, CancellationToken token)
         {
-            if (!TryGetUserId(out int userId)) return Unauthorized();
+            var userIdResult = TryGetUserId();
+            if (userIdResult.IsFailure) return HandleFailure(userIdResult);
 
-            bool wasWalletAdded = await walletService.HandleAsync(userId, dto.Name, token);
+            Result result = await walletService.HandleAsync(userIdResult.Value, dto.Name, token);
 
-            return wasWalletAdded
+            return result.IsSuccess
                 ? Ok()
-                : Problem(
-                    detail: "The wallet with the same name is already created.",
-                    statusCode: StatusCodes.Status409Conflict,
-                    title: "Wallet already exist."
-                );
+                : HandleFailure(result);
         }
     }
 }
