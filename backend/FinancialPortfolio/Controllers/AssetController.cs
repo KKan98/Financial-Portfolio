@@ -13,21 +13,28 @@ namespace FinancialPortfolio.Presentation.Controllers
         [HttpGet("{walletId:int}")]
         public async Task<IActionResult> Get([FromRoute] AssetGetRequestDto request, CancellationToken token)
         {
-            if (!TryGetUserId(out var userId)) return Unauthorized();
+            var userIdResult = TryGetUserId();
+            if (userIdResult.IsFailure) return HandleFailure(userIdResult);
 
-            var assets = await assetService.GetAsync(userId, request, token);
+            var assetsResult = await assetService.GetAsync(userIdResult.Value, request, token);
 
-            return Ok(assets);
+            return assetsResult.IsSuccess
+                ? Ok(assetsResult.Value)
+                : HandleFailure(assetsResult);
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] AssetAddRequestDto request, CancellationToken token)
         {
-            if (!TryGetUserId(out var userId)) return Unauthorized();
+            var userIdResult = TryGetUserId();
+            if (userIdResult.IsFailure) return HandleFailure(userIdResult);
 
-            await assetService.AddAsync(userId, request, token);
+            var result = await assetService.AddAsync(userIdResult.Value, request, token);
 
-            return Ok();
+            return result.IsSuccess
+                ? Ok()
+                : HandleFailure(result);
+
         }
     }
 }

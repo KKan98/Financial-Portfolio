@@ -4,6 +4,7 @@
     {
         Conflict,
         Validation,
-        Unauthorized
+        Unauthorized,
+        NotFound
     }
 }

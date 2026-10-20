@@ -1,11 +1,12 @@
-﻿using FinancialPortfolio.Application.DTOs.Asset;
+﻿using FinancialPortfolio.Application.Common;
+using FinancialPortfolio.Application.DTOs.Asset;
 
 namespace FinancialPortfolio.Application.Services.Asset
 {
     public interface IAssetService
     {
-        Task<List<AssetGetResponseDto>> GetAsync(int userId, AssetGetRequestDto request, CancellationToken token);
+        Task<Result<List<AssetGetResponseDto>>> GetAsync(int userId, AssetGetRequestDto request, CancellationToken token);
 
-        Task AddAsync(int userId, AssetAddRequestDto addRequest, CancellationToken token);
+        Task<Result> AddAsync(int userId, AssetAddRequestDto addRequest, CancellationToken token);
     }
 }
