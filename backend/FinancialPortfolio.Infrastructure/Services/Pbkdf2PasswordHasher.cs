@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Application.Common;
 
 namespace FinancialPortfolio.Infrastructure.Services
 {
@@ -18,7 +19,7 @@ namespace FinancialPortfolio.Infrastructure.Services
             return $"{Convert.ToHexString(hash)}-{Convert.ToHexString(salt)}";
         }
 
-        public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
+        public Result<bool> VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
             string[] parts = hashedPassword.Split('-');
 

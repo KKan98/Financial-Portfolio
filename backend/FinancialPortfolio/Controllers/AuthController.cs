@@ -9,33 +9,29 @@ namespace FinancialPortfolio.Presentation.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthController(ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ControllerBase
+    public class AuthController(ILoginUserHandler loginUserHandler, IRegisterUserHandler registerUserHandler) : ApiControllerBase
     {
 
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<LoginResponseDto>> Login([FromBody] LoginRequestDto requestDto, CancellationToken ct)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto requestDto, CancellationToken ct)
         {
-            var response = await loginUserHandler.HandleAsync(requestDto, ct);
+            var result = await loginUserHandler.HandleAsync(requestDto, ct);
 
-            return response is null ? 
-                Unauthorized("Invalid Credentials") : 
-                Ok(response);
+            return result.IsSuccess
+                ? Ok(result.Value)
+                : HandleFailure(result);
         }
 
         [HttpPost("signup")]
         [AllowAnonymous]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequestDto requestDto, CancellationToken ct)
         {
-            bool wasUserAdded = await registerUserHandler.HandleAsync(requestDto, ct);
+            var result = await registerUserHandler.HandleAsync(requestDto, ct);
 
-            return wasUserAdded
+            return result.IsSuccess
                 ? Ok()
-                : Problem(
-                    detail: "The email address is already registered to another account.",
-                    statusCode: StatusCodes.Status409Conflict,
-                    title: "User already exist"
-                );
+                : HandleFailure(result);
         }
     }
 }

@@ -41,6 +41,10 @@ namespace FinancialPortfolio.Presentation.Controllers
                     statusCode: StatusCodes.Status401Unauthorized,
                     detail: result.Error.Description
                 ),
+                ErrorType.NotFound => Problem(
+                    statusCode: StatusCodes.Status404NotFound,
+                    detail: result.Error.Description
+                    ),
                 _ => Problem(
                     statusCode: StatusCodes.Status500InternalServerError,
                     detail: result.Error.Description

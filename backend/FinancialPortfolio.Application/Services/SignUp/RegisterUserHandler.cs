@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
+using FinancialPortfolio.Application.Common;
 using FinancialPortfolio.Application.DTOs.SignUp;
 using FinancialPortfolio.Domain.Entities.Users;
 using FinancialPortfolio.Domain.Enums;
@@ -7,11 +8,11 @@ namespace FinancialPortfolio.Application.Services.SignUp
 {
     internal sealed class RegisterUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) : IRegisterUserHandler
     {
-        public async Task<bool> HandleAsync(SignUpRequestDto requestDto, CancellationToken token)
+        public async Task<Result> HandleAsync(SignUpRequestDto requestDto, CancellationToken token)
         {
             bool doesUserExist = await userRepository.DoesUserExistAsync(requestDto.Email, token);
 
-            if (doesUserExist) return false;
+            if (doesUserExist) return Result.Failure(Errors.UserNotFound);
 
             string hashedPassword = passwordHasher.HashPassword(requestDto.Password);
 
@@ -24,7 +25,7 @@ namespace FinancialPortfolio.Application.Services.SignUp
 
             await userRepository.AddUserAsync(user, token);
 
-            return true;
+            return Result.Success();
         }
     }
 }
