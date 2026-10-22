@@ -3,13 +3,13 @@ using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Domain.Entities.Users
 {
-    public class User
+    public sealed class User
     {
         public int Id { get; set; }
 
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
-        public string Password { get; set; }
+        public required string Password { get; set; }
 
         public Role Role { get; set; }
 

@@ -3,7 +3,7 @@ using FinancialPortfolio.Domain.ValueObjects;
 
 namespace FinancialPortfolio.Domain.Entities.Assets
 {
-    public class Asset
+    public sealed class Asset
     {
         public Guid Id { get; set; }
 

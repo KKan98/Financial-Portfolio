@@ -1,5 +1,6 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Infrastructure.Context;
+using FinancialPortfolio.Infrastructure.MarketData.AlphaVantage;
 using FinancialPortfolio.Infrastructure.Repositories;
 using FinancialPortfolio.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,8 @@ namespace FinancialPortfolio.Infrastructure.Extensions
             services.AddScoped<IWalletRepository, WalletRepository>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAssetRepository, AssetRepository>();
+            services.AddScoped<IMarketDataProvider, AlphaVantageClient>();
+
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 
             return services;

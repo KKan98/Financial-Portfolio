@@ -5,15 +5,15 @@ namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage.Contracts
     public record MetaData
     {
         [JsonPropertyName("1. Information")]
-        public string Information { get; set; }
+        public required string Information { get; set; }
 
         [JsonPropertyName("2. Symbol")]
-        public string Symbol { get; set; }
+        public required string Symbol { get; set; }
 
         [JsonPropertyName("3. Last Refreshed")]
-        public string LastRefreshed { get; set; }
+        public required string LastRefreshed { get; set; }
 
         [JsonPropertyName("4. Time Zone")]
-        public string TimeZone { get; set; }
+        public required string TimeZone { get; set; }
     }
 }

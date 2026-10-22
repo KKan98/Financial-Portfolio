@@ -4,7 +4,7 @@ using FinancialPortfolio.Domain.Entities.Users;
 
 namespace FinancialPortfolio.Domain.Entities.Wallets
 {
-    public class Wallet
+    public sealed class Wallet
     {
         public int Id { get; set; }
 
