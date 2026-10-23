@@ -8,15 +8,7 @@ namespace FinancialPortfolio.Application.Services.MarketData
     {
         public async Task<Result<MarketDataDto>> Get(string symbol, CancellationToken token)
         {
-            try
-            {
-                return await marketDataProvider.GetWeeklyMarketData(symbol, token);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            return await marketDataProvider.GetWeeklyMarketData(symbol, token);
         }
     }
 }

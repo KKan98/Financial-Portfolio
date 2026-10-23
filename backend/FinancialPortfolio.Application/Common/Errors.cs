@@ -1,4 +1,5 @@
-﻿using FinancialPortfolio.Domain.Enums;
+﻿using System.Diagnostics;
+using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Application.Common
 {
@@ -16,5 +17,11 @@ namespace FinancialPortfolio.Application.Common
             new("InvalidCredentials", ErrorType.Unauthorized, "Invalid Credentials.");
 
         public static Error UserNotFound { get; } = new("UserNotFound", ErrorType.NotFound, "User does not exist.");
+
+        public static Error MarketDataInvalidResponse { get; } = new("MarketDataInvalidResponse", ErrorType.Integration,
+            "Market data returned invalid response.");
+
+        public static Error MarketDataUnavailable { get; } = new("MarketDataUnavailable", ErrorType.Integration,
+            "Requested server is currently unavailable.");
     }
 }

@@ -45,6 +45,10 @@ namespace FinancialPortfolio.Presentation.Controllers
                     statusCode: StatusCodes.Status404NotFound,
                     detail: result.Error.Description
                     ),
+                ErrorType.Integration => Problem(
+                    statusCode: StatusCodes.Status502BadGateway,
+                    detail: result.Error.Description
+                    ),
                 _ => Problem(
                     statusCode: StatusCodes.Status500InternalServerError,
                     detail: result.Error.Description

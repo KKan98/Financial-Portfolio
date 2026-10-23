@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.Common;
 using FinancialPortfolio.Application.DTOs.MarketData;
@@ -17,7 +18,8 @@ namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage
         {
             try
             {
-                var data = await client.GetFromJsonAsync<MarketDataResponse>($"query?function=TIME_SERIES_WEEKLY&symbol={symbol}&apikey={_apikey}", token);
+                var data = await client.GetFromJsonAsync<MarketDataResponse>(
+                    $"query?function=TIME_SERIES_WEEKLY&symbol={symbol}&apikey={_apikey}", token);
 
                 var dto = new MarketDataDto
                 {
@@ -34,10 +36,15 @@ namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage
 
                 return dto;
             }
-            catch (Exception e)
+            catch (JsonException ex)
             {
-                Console.WriteLine(e); //log it
-                throw;
+                Console.WriteLine(ex); //log it
+                return Errors.MarketDataInvalidResponse;
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine(ex);
+                return Errors.MarketDataUnavailable;
             }
             
         }
