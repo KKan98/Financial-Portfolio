@@ -1,4 +1,4 @@
-﻿using FinancialPortfolio.Domain.Entities.Assets;
+﻿using FinancialPortfolio.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

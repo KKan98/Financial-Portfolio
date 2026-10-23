@@ -1,7 +1,6 @@
-﻿using FinancialPortfolio.Domain.Entities.Wallets;
-using FinancialPortfolio.Domain.ValueObjects;
+﻿using FinancialPortfolio.Domain.ValueObjects;
 
-namespace FinancialPortfolio.Domain.Entities.Assets
+namespace FinancialPortfolio.Domain.Entities
 {
     public sealed class Asset
     {

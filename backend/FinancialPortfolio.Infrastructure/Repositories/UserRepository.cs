@@ -1,5 +1,5 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Domain.Entities.Users;
+using FinancialPortfolio.Domain.Entities;
 using FinancialPortfolio.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;

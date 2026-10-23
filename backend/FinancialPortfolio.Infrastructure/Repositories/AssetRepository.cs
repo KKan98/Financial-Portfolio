@@ -1,6 +1,6 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.DTOs.Asset;
-using FinancialPortfolio.Domain.Entities.Assets;
+using FinancialPortfolio.Domain.Entities;
 using FinancialPortfolio.Domain.ValueObjects;
 using FinancialPortfolio.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;

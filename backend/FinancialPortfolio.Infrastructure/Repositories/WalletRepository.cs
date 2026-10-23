@@ -1,6 +1,6 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.DTOs.Wallet;
-using FinancialPortfolio.Domain.Entities.Wallets;
+using FinancialPortfolio.Domain.Entities;
 using FinancialPortfolio.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;

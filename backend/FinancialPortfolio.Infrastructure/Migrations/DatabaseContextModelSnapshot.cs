@@ -23,7 +23,7 @@ namespace FinancialPortfolio.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Assets.Asset", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Asset", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.Property<int>("WalletId")
                         .HasColumnType("integer");
 
-                    b.ComplexProperty<Dictionary<string, object>>("BuyingPrice", "FinancialPortfolio.Domain.Entities.Assets.Asset.BuyingPrice#Money", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("BuyingPrice", "FinancialPortfolio.Domain.Entities.Asset.BuyingPrice#Money", b1 =>
                         {
                             b1.Property<decimal>("Amount")
                                 .HasPrecision(18, 2)
@@ -67,7 +67,221 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.ToTable("assets", (string)null);
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Users.User", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Exchange", b =>
+                {
+                    b.Property<string>("Symbol")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Suffix")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("");
+
+                    b.HasKey("Symbol");
+
+                    b.ToTable("exchanges", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Symbol = "XETR",
+                            Name = "Deutsche Börse Xetra",
+                            Suffix = "DE"
+                        },
+                        new
+                        {
+                            Symbol = "XFRA",
+                            Name = "Frankfurt Stock Exchange",
+                            Suffix = "F"
+                        },
+                        new
+                        {
+                            Symbol = "XLON",
+                            Name = "London Stock Exchange",
+                            Suffix = "L"
+                        },
+                        new
+                        {
+                            Symbol = "XAMS",
+                            Name = "Euronext Amsterdam",
+                            Suffix = "AS"
+                        },
+                        new
+                        {
+                            Symbol = "XPAR",
+                            Name = "Euronext Paris",
+                            Suffix = "PA"
+                        },
+                        new
+                        {
+                            Symbol = "XBRU",
+                            Name = "Euronext Brussels",
+                            Suffix = "BR"
+                        },
+                        new
+                        {
+                            Symbol = "XLIS",
+                            Name = "Euronext Lisbon",
+                            Suffix = "LS"
+                        },
+                        new
+                        {
+                            Symbol = "XMIL",
+                            Name = "Borsa Italiana / Euronext Milan",
+                            Suffix = "MI"
+                        },
+                        new
+                        {
+                            Symbol = "XSWX",
+                            Name = "SIX Swiss Exchange",
+                            Suffix = "SW"
+                        },
+                        new
+                        {
+                            Symbol = "XWAR",
+                            Name = "Warsaw Stock Exchange",
+                            Suffix = "WA"
+                        },
+                        new
+                        {
+                            Symbol = "XSTO",
+                            Name = "Nasdaq Stockholm",
+                            Suffix = "ST"
+                        },
+                        new
+                        {
+                            Symbol = "XCSE",
+                            Name = "Nasdaq Copenhagen",
+                            Suffix = "CO"
+                        },
+                        new
+                        {
+                            Symbol = "XHEL",
+                            Name = "Nasdaq Helsinki",
+                            Suffix = "HE"
+                        },
+                        new
+                        {
+                            Symbol = "XOSL",
+                            Name = "Oslo Børs",
+                            Suffix = "OL"
+                        },
+                        new
+                        {
+                            Symbol = "XWBO",
+                            Name = "Vienna Stock Exchange",
+                            Suffix = "VI"
+                        },
+                        new
+                        {
+                            Symbol = "XPRA",
+                            Name = "Prague Stock Exchange",
+                            Suffix = "PR"
+                        },
+                        new
+                        {
+                            Symbol = "XBUD",
+                            Name = "Budapest Stock Exchange",
+                            Suffix = "BD"
+                        },
+                        new
+                        {
+                            Symbol = "XATH",
+                            Name = "Athens Stock Exchange",
+                            Suffix = "AT"
+                        },
+                        new
+                        {
+                            Symbol = "XMAD",
+                            Name = "Madrid Stock Exchange",
+                            Suffix = "MC"
+                        },
+                        new
+                        {
+                            Symbol = "XIST",
+                            Name = "Borsa Istanbul",
+                            Suffix = "IS"
+                        },
+                        new
+                        {
+                            Symbol = "XNAS",
+                            Name = "Nasdaq US",
+                            Suffix = ""
+                        },
+                        new
+                        {
+                            Symbol = "XNYS",
+                            Name = "New York Stock Exchange",
+                            Suffix = ""
+                        },
+                        new
+                        {
+                            Symbol = "ARCX",
+                            Name = "NYSE Arca",
+                            Suffix = ""
+                        },
+                        new
+                        {
+                            Symbol = "XTSE",
+                            Name = "Toronto Stock Exchange",
+                            Suffix = "TO"
+                        },
+                        new
+                        {
+                            Symbol = "XTSX",
+                            Name = "TSX Venture Exchange",
+                            Suffix = "V"
+                        },
+                        new
+                        {
+                            Symbol = "XASX",
+                            Name = "Australian Securities Exchange",
+                            Suffix = "AX"
+                        },
+                        new
+                        {
+                            Symbol = "XTKS",
+                            Name = "Tokyo Stock Exchange",
+                            Suffix = "T"
+                        },
+                        new
+                        {
+                            Symbol = "XHKG",
+                            Name = "Hong Kong Stock Exchange",
+                            Suffix = "HK"
+                        },
+                        new
+                        {
+                            Symbol = "XSES",
+                            Name = "Singapore Exchange",
+                            Suffix = "SI"
+                        },
+                        new
+                        {
+                            Symbol = "XBOM",
+                            Name = "BSE India",
+                            Suffix = "BO"
+                        },
+                        new
+                        {
+                            Symbol = "XSHG",
+                            Name = "Shanghai Stock Exchange",
+                            Suffix = "SS"
+                        },
+                        new
+                        {
+                            Symbol = "XSHE",
+                            Name = "Shenzhen Stock Exchange",
+                            Suffix = "SZ"
+                        });
+                });
+
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,7 +310,7 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallets.Wallet", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallet", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,9 +334,9 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.ToTable("wallets", (string)null);
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Assets.Asset", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Asset", b =>
                 {
-                    b.HasOne("FinancialPortfolio.Domain.Entities.Wallets.Wallet", "Wallet")
+                    b.HasOne("FinancialPortfolio.Domain.Entities.Wallet", "Wallet")
                         .WithMany("Assets")
                         .HasForeignKey("WalletId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -131,9 +345,9 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.Navigation("Wallet");
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallets.Wallet", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallet", b =>
                 {
-                    b.HasOne("FinancialPortfolio.Domain.Entities.Users.User", "User")
+                    b.HasOne("FinancialPortfolio.Domain.Entities.User", "User")
                         .WithMany("Wallets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -142,12 +356,12 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Users.User", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.User", b =>
                 {
                     b.Navigation("Wallets");
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallets.Wallet", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Wallet", b =>
                 {
                     b.Navigation("Assets");
                 });

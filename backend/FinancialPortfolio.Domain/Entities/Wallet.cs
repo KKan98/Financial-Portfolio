@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using FinancialPortfolio.Domain.Entities.Assets;
-using FinancialPortfolio.Domain.Entities.Users;
 
-namespace FinancialPortfolio.Domain.Entities.Wallets
+namespace FinancialPortfolio.Domain.Entities
 {
     public sealed class Wallet
     {

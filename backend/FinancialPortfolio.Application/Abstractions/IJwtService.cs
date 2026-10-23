@@ -1,5 +1,5 @@
 ﻿using FinancialPortfolio.Application.DTOs.Auth;
-using FinancialPortfolio.Domain.Entities.Users;
+using FinancialPortfolio.Domain.Entities;
 
 namespace FinancialPortfolio.Application.Abstractions
 {

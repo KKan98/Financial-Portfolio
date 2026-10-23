@@ -1,7 +1,6 @@
-﻿using FinancialPortfolio.Domain.Entities.Wallets;
-using FinancialPortfolio.Domain.Enums;
+﻿using FinancialPortfolio.Domain.Enums;
 
-namespace FinancialPortfolio.Domain.Entities.Users
+namespace FinancialPortfolio.Domain.Entities
 {
     public sealed class User
     {
