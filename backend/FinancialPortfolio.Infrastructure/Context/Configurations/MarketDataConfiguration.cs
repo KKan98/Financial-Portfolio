@@ -8,9 +8,9 @@ namespace FinancialPortfolio.Infrastructure.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<MarketData> builder)
         {
-            builder.ToTable("MarketData");
+            builder.ToTable("market_data");
 
-            builder.HasKey(md => md.Symbol);
+            builder.HasKey(md => new { md.Symbol, md.Date });
 
             builder.Property(md => md.Symbol)
                 .IsRequired();

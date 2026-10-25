@@ -23,5 +23,8 @@ namespace FinancialPortfolio.Application.Common
 
         public static Error MarketDataUnavailable { get; } = new("MarketDataUnavailable", ErrorType.Integration,
             "Requested server is currently unavailable.");
+
+        public static Error MarketDataNotFound { get; } =
+            new("MarketDataNotFound", ErrorType.NotFound, "Market data not found.");
     }
 }

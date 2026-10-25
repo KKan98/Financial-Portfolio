@@ -8,7 +8,7 @@ namespace FinancialPortfolio.Presentation.Controllers
     [Route("api/marketData")]
     [ApiController]
     [Authorize]
-    public class MarketDataController(IMarketData marketData) : ApiControllerBase
+    public class MarketDataController(IMarketDataService marketData) : ApiControllerBase
     {
         [HttpGet("{symbol}")]
         public async Task<IActionResult> Get([FromRoute] MarketDataRequestDto request, CancellationToken token)

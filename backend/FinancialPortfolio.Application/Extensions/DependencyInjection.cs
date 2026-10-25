@@ -15,7 +15,8 @@ namespace FinancialPortfolio.Application.Extensions
             services.AddScoped<IRegisterUserHandler, RegisterUserHandler>();
             services.AddScoped<IWalletService, WalletService>();
             services.AddScoped<IAssetService, AssetService>();
-            services.AddScoped<IMarketData, MarketData>();
+            services.AddScoped<IMarketDataService, MarketDataService>();
+            services.AddScoped<IMarketDataService, MarketDataService>();
 
             return services;
         }

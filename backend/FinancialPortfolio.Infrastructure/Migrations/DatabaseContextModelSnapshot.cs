@@ -286,12 +286,12 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.Property<string>("Symbol")
                         .HasColumnType("text");
 
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
                     b.Property<decimal>("Close")
                         .HasPrecision(18, 4)
                         .HasColumnType("numeric(18,4)");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
 
                     b.Property<decimal>("High")
                         .HasPrecision(18, 4)
@@ -305,9 +305,9 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                         .HasPrecision(18, 4)
                         .HasColumnType("numeric(18,4)");
 
-                    b.HasKey("Symbol");
+                    b.HasKey("Symbol", "Date");
 
-                    b.ToTable("MarketData", (string)null);
+                    b.ToTable("market_data", (string)null);
                 });
 
             modelBuilder.Entity("FinancialPortfolio.Domain.Entities.User", b =>

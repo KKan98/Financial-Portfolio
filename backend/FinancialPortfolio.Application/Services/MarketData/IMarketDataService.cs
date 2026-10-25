@@ -3,7 +3,7 @@ using FinancialPortfolio.Application.DTOs.MarketData;
 
 namespace FinancialPortfolio.Application.Services.MarketData
 {
-    public interface IMarketData
+    public interface IMarketDataService
     {
         public Task<Result<MarketDataDto>> Get(string symbol, CancellationToken token);
     }
