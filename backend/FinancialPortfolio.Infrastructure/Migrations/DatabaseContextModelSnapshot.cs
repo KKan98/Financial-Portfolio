@@ -281,6 +281,35 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.MarketData", b =>
+                {
+                    b.Property<string>("Symbol")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Close")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
+                    b.Property<decimal>("High")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<decimal>("Low")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<decimal>("Open")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.HasKey("Symbol");
+
+                    b.ToTable("MarketData", (string)null);
+                });
+
             modelBuilder.Entity("FinancialPortfolio.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")

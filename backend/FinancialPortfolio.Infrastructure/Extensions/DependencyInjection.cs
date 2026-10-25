@@ -1,6 +1,6 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Infrastructure.Context;
-using FinancialPortfolio.Infrastructure.MarketData.AlphaVantage;
+using FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage;
 using FinancialPortfolio.Infrastructure.Repositories;
 using FinancialPortfolio.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;

@@ -3,10 +3,10 @@ using System.Text.Json;
 using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.Common;
 using FinancialPortfolio.Application.DTOs.MarketData;
-using FinancialPortfolio.Infrastructure.MarketData.AlphaVantage.Contracts;
+using FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage.Contracts;
 using Microsoft.Extensions.Options;
 
-namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage
+namespace FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage
 {
     public class AlphaVantageClient(
         IOptions<AlphaVantageOptions> options,

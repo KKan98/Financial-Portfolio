@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage.Contracts
+namespace FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage.Contracts
 {
     public record MarketDataResponse
     {

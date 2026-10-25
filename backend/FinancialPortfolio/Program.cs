@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.Extensions;
-using FinancialPortfolio.Infrastructure.MarketData.AlphaVantage;
 using FinancialPortfolio.Presentation.Extensions;
 using Microsoft.Extensions.Options;
+using FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage;
 
 var builder = WebApplication.CreateBuilder(args);
 

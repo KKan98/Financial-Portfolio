@@ -1,4 +1,4 @@
-﻿namespace FinancialPortfolio.Infrastructure.MarketData.AlphaVantage
+﻿namespace FinancialPortfolio.Infrastructure.MarketDataClient.AlphaVantage
 {
     public class AlphaVantageOptions
     {
