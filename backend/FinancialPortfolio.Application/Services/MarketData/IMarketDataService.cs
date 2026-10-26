@@ -5,6 +5,6 @@ namespace FinancialPortfolio.Application.Services.MarketData
 {
     public interface IMarketDataService
     {
-        public Task<Result<MarketDataDto>> Get(string symbol, CancellationToken token);
+        public Task<Result<MarketDataDto>> Get(MarketDataRequestDto request, CancellationToken token);
     }
 }

@@ -10,10 +10,10 @@ namespace FinancialPortfolio.Presentation.Controllers
     [Authorize]
     public class MarketDataController(IMarketDataService marketData) : ApiControllerBase
     {
-        [HttpGet("{symbol}")]
+        [HttpGet("{symbol}/{MIC}")]
         public async Task<IActionResult> Get([FromRoute] MarketDataRequestDto request, CancellationToken token)
         {
-            var result = await marketData.Get(request.Symbol, token);
+            var result = await marketData.Get(request, token);
 
             return result.IsSuccess
                 ? Ok(result.Value)

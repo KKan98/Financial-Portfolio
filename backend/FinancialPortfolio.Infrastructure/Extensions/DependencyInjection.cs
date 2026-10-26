@@ -27,6 +27,7 @@ namespace FinancialPortfolio.Infrastructure.Extensions
             services.AddScoped<IStockRepository, StockRepository>();
             services.AddScoped<IMarketDataProvider, AlphaVantageClient>();
             services.AddScoped<IMarketDataRepository, MarketDataRepository>();
+            services.AddScoped<IExchangeRepository, ExchangeRepository>();
 
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
 

@@ -6,12 +6,19 @@ namespace FinancialPortfolio.Application.Services.MarketData
 {
     internal class MarketDataService(
         IMarketDataProvider marketDataProvider,
-        IMarketDataRepository marketDataRepository
+        IMarketDataRepository marketDataRepository,
+        IExchangeRepository exchangeRepository
         ) : IMarketDataService
     {
-        public async Task<Result<MarketDataDto>> Get(string symbol, CancellationToken token)
+        public async Task<Result<MarketDataDto>> Get(MarketDataRequestDto request, CancellationToken token)
         {
-            var marketDataResult= await GetFromDb(symbol, token); //symbol needs to be fetched from Exchanges first, then if not found then symbol search, with that get with AlphaVantage Client, save with user search symbol.
+            var suffix = await exchangeRepository.GetSuffix(request.MIC, token);
+
+            var symbol = string.IsNullOrEmpty(suffix)
+                ? request.Symbol
+                : $"{request.Symbol}.{suffix}";
+
+            var marketDataResult= await GetFromDb(symbol, token);
 
             if (marketDataResult.IsSuccess)
             {

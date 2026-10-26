@@ -25,10 +25,12 @@ namespace FinancialPortfolio.Infrastructure.Migrations
 
             modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Exchange", b =>
                 {
-                    b.Property<string>("Symbol")
-                        .HasColumnType("text");
-
                     b.Property<string>("MIC")
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)")
+                        .HasColumnName("Mic");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -38,201 +40,201 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasDefaultValue("");
 
-                    b.HasKey("Symbol");
+                    b.HasKey("MIC");
 
                     b.ToTable("exchanges", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Symbol = "XETR",
-                            MIC = "Deutsche Börse Xetra",
+                            MIC = "XETR",
+                            Name = "Deutsche Börse Xetra",
                             Suffix = "DE"
                         },
                         new
                         {
-                            Symbol = "XFRA",
-                            MIC = "Frankfurt Stock Exchange",
+                            MIC = "XFRA",
+                            Name = "Frankfurt Stock Exchange",
                             Suffix = "F"
                         },
                         new
                         {
-                            Symbol = "XLON",
-                            MIC = "London Stock Exchange",
+                            MIC = "XLON",
+                            Name = "London Stock Exchange",
                             Suffix = "L"
                         },
                         new
                         {
-                            Symbol = "XAMS",
-                            MIC = "Euronext Amsterdam",
+                            MIC = "XAMS",
+                            Name = "Euronext Amsterdam",
                             Suffix = "AS"
                         },
                         new
                         {
-                            Symbol = "XPAR",
-                            MIC = "Euronext Paris",
+                            MIC = "XPAR",
+                            Name = "Euronext Paris",
                             Suffix = "PA"
                         },
                         new
                         {
-                            Symbol = "XBRU",
-                            MIC = "Euronext Brussels",
+                            MIC = "XBRU",
+                            Name = "Euronext Brussels",
                             Suffix = "BR"
                         },
                         new
                         {
-                            Symbol = "XLIS",
-                            MIC = "Euronext Lisbon",
+                            MIC = "XLIS",
+                            Name = "Euronext Lisbon",
                             Suffix = "LS"
                         },
                         new
                         {
-                            Symbol = "XMIL",
-                            MIC = "Borsa Italiana / Euronext Milan",
+                            MIC = "XMIL",
+                            Name = "Borsa Italiana / Euronext Milan",
                             Suffix = "MI"
                         },
                         new
                         {
-                            Symbol = "XSWX",
-                            MIC = "SIX Swiss Exchange",
+                            MIC = "XSWX",
+                            Name = "SIX Swiss Exchange",
                             Suffix = "SW"
                         },
                         new
                         {
-                            Symbol = "XWAR",
-                            MIC = "Warsaw Stock Exchange",
+                            MIC = "XWAR",
+                            Name = "Warsaw Stock Exchange",
                             Suffix = "WA"
                         },
                         new
                         {
-                            Symbol = "XSTO",
-                            MIC = "Nasdaq Stockholm",
+                            MIC = "XSTO",
+                            Name = "Nasdaq Stockholm",
                             Suffix = "ST"
                         },
                         new
                         {
-                            Symbol = "XCSE",
-                            MIC = "Nasdaq Copenhagen",
+                            MIC = "XCSE",
+                            Name = "Nasdaq Copenhagen",
                             Suffix = "CO"
                         },
                         new
                         {
-                            Symbol = "XHEL",
-                            MIC = "Nasdaq Helsinki",
+                            MIC = "XHEL",
+                            Name = "Nasdaq Helsinki",
                             Suffix = "HE"
                         },
                         new
                         {
-                            Symbol = "XOSL",
-                            MIC = "Oslo Børs",
+                            MIC = "XOSL",
+                            Name = "Oslo Børs",
                             Suffix = "OL"
                         },
                         new
                         {
-                            Symbol = "XWBO",
-                            MIC = "Vienna Stock Exchange",
+                            MIC = "XWBO",
+                            Name = "Vienna Stock Exchange",
                             Suffix = "VI"
                         },
                         new
                         {
-                            Symbol = "XPRA",
-                            MIC = "Prague Stock Exchange",
+                            MIC = "XPRA",
+                            Name = "Prague Stock Exchange",
                             Suffix = "PR"
                         },
                         new
                         {
-                            Symbol = "XBUD",
-                            MIC = "Budapest Stock Exchange",
+                            MIC = "XBUD",
+                            Name = "Budapest Stock Exchange",
                             Suffix = "BD"
                         },
                         new
                         {
-                            Symbol = "XATH",
-                            MIC = "Athens Stock Exchange",
+                            MIC = "XATH",
+                            Name = "Athens Stock Exchange",
                             Suffix = "AT"
                         },
                         new
                         {
-                            Symbol = "XMAD",
-                            MIC = "Madrid Stock Exchange",
+                            MIC = "XMAD",
+                            Name = "Madrid Stock Exchange",
                             Suffix = "MC"
                         },
                         new
                         {
-                            Symbol = "XIST",
-                            MIC = "Borsa Istanbul",
+                            MIC = "XIST",
+                            Name = "Borsa Istanbul",
                             Suffix = "IS"
                         },
                         new
                         {
-                            Symbol = "XNAS",
-                            MIC = "Nasdaq US",
+                            MIC = "XNAS",
+                            Name = "Nasdaq US",
                             Suffix = ""
                         },
                         new
                         {
-                            Symbol = "XNYS",
-                            MIC = "New York Stock Exchange",
+                            MIC = "XNYS",
+                            Name = "New York Stock Exchange",
                             Suffix = ""
                         },
                         new
                         {
-                            Symbol = "ARCX",
-                            MIC = "NYSE Arca",
+                            MIC = "ARCX",
+                            Name = "NYSE Arca",
                             Suffix = ""
                         },
                         new
                         {
-                            Symbol = "XTSE",
-                            MIC = "Toronto Stock Exchange",
+                            MIC = "XTSE",
+                            Name = "Toronto Stock Exchange",
                             Suffix = "TO"
                         },
                         new
                         {
-                            Symbol = "XTSX",
-                            MIC = "TSX Venture Exchange",
+                            MIC = "XTSX",
+                            Name = "TSX Venture Exchange",
                             Suffix = "V"
                         },
                         new
                         {
-                            Symbol = "XASX",
-                            MIC = "Australian Securities Exchange",
+                            MIC = "XASX",
+                            Name = "Australian Securities Exchange",
                             Suffix = "AX"
                         },
                         new
                         {
-                            Symbol = "XTKS",
-                            MIC = "Tokyo Stock Exchange",
+                            MIC = "XTKS",
+                            Name = "Tokyo Stock Exchange",
                             Suffix = "T"
                         },
                         new
                         {
-                            Symbol = "XHKG",
-                            MIC = "Hong Kong Stock Exchange",
+                            MIC = "XHKG",
+                            Name = "Hong Kong Stock Exchange",
                             Suffix = "HK"
                         },
                         new
                         {
-                            Symbol = "XSES",
-                            MIC = "Singapore Exchange",
+                            MIC = "XSES",
+                            Name = "Singapore Exchange",
                             Suffix = "SI"
                         },
                         new
                         {
-                            Symbol = "XBOM",
-                            MIC = "BSE India",
+                            MIC = "XBOM",
+                            Name = "BSE India",
                             Suffix = "BO"
                         },
                         new
                         {
-                            Symbol = "XSHG",
-                            MIC = "Shanghai Stock Exchange",
+                            MIC = "XSHG",
+                            Name = "Shanghai Stock Exchange",
                             Suffix = "SS"
                         },
                         new
                         {
-                            Symbol = "XSHE",
-                            MIC = "Shenzhen Stock Exchange",
+                            MIC = "XSHE",
+                            Name = "Shenzhen Stock Exchange",
                             Suffix = "SZ"
                         });
                 });
