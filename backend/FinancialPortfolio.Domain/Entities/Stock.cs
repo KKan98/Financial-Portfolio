@@ -2,13 +2,15 @@
 
 namespace FinancialPortfolio.Domain.Entities
 {
-    public sealed class Asset
+    public sealed class Stock
     {
         public Guid Id { get; set; }
 
         public required int WalletId { get; set; }
 
-        public required string Name { get; set; }
+        public required string Symbol { get; set; }
+
+        public required string MIC { get; set; }
 
         public required decimal Quantity { get; set; }
 

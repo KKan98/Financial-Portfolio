@@ -1,10 +1,12 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
 using FinancialPortfolio.Application.Common;
 using FinancialPortfolio.Application.DTOs.Asset;
+using FinancialPortfolio.Application.DTOs.Stock;
 
 namespace FinancialPortfolio.Application.Services.Asset
 {
-    internal class AssetService(IAssetRepository assetRepository, IWalletRepository walletRepository) : IAssetService
+    //TODO: This should return all assets for a wallet, currently only stocks, future will hold bonds + accounts
+    internal class AssetService(IStockRepository stockRepository, IWalletRepository walletRepository) : IAssetService
     {
         public async Task<Result<List<AssetGetResponseDto>>> GetAsync(int userId, AssetGetRequestDto request, CancellationToken token)
         {
@@ -15,7 +17,7 @@ namespace FinancialPortfolio.Application.Services.Asset
                     return Errors.WalletNotFound;
                 }
 
-                return await assetRepository.GetAsync(request.WalletId, token);
+                return await stockRepository.GetAsync(request.WalletId, token);
                 
             }
             catch (Exception e)
@@ -26,7 +28,7 @@ namespace FinancialPortfolio.Application.Services.Asset
 
         }
 
-        public async Task<Result> AddAsync(int userId, AssetAddRequestDto request, CancellationToken token)
+        public async Task<Result> AddAsync(int userId, StockAddRequestDto request, CancellationToken token)
         {
             try
             {
@@ -35,7 +37,7 @@ namespace FinancialPortfolio.Application.Services.Asset
                     return Errors.WalletNotFound;
                 }
 
-                await assetRepository.AddAsync(request, token);
+                await stockRepository.AddAsync(request, token);
 
                 return Result.Success();
             }

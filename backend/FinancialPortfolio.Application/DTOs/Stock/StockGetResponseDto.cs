@@ -1,7 +1,7 @@
-﻿using FinancialPortfolio.Domain.Enums;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using FinancialPortfolio.Domain.Enums;
 
-namespace FinancialPortfolio.Application.DTOs.Asset
+namespace FinancialPortfolio.Application.DTOs.Stock
 {
     public record AssetGetResponseDto(
         Guid Id,

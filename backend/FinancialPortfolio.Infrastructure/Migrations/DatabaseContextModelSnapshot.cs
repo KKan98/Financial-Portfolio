@@ -23,56 +23,12 @@ namespace FinancialPortfolio.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Asset", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<decimal>("Quantity")
-                        .HasPrecision(18, 4)
-                        .HasColumnType("numeric(18,4)");
-
-                    b.Property<DateTime>("Timestamp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("now()");
-
-                    b.Property<int>("WalletId")
-                        .HasColumnType("integer");
-
-                    b.ComplexProperty<Dictionary<string, object>>("BuyingPrice", "FinancialPortfolio.Domain.Entities.Asset.BuyingPrice#Money", b1 =>
-                        {
-                            b1.Property<decimal>("Amount")
-                                .HasPrecision(18, 2)
-                                .HasColumnType("numeric(18,2)")
-                                .HasColumnName("BuyingPrice");
-
-                            b1.Property<string>("Currency")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("character varying(3)")
-                                .HasColumnName("Currency");
-                        });
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WalletId");
-
-                    b.ToTable("assets", (string)null);
-                });
-
             modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Exchange", b =>
                 {
                     b.Property<string>("Symbol")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("MIC")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -90,193 +46,193 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                         new
                         {
                             Symbol = "XETR",
-                            Name = "Deutsche Börse Xetra",
+                            MIC = "Deutsche Börse Xetra",
                             Suffix = "DE"
                         },
                         new
                         {
                             Symbol = "XFRA",
-                            Name = "Frankfurt Stock Exchange",
+                            MIC = "Frankfurt Stock Exchange",
                             Suffix = "F"
                         },
                         new
                         {
                             Symbol = "XLON",
-                            Name = "London Stock Exchange",
+                            MIC = "London Stock Exchange",
                             Suffix = "L"
                         },
                         new
                         {
                             Symbol = "XAMS",
-                            Name = "Euronext Amsterdam",
+                            MIC = "Euronext Amsterdam",
                             Suffix = "AS"
                         },
                         new
                         {
                             Symbol = "XPAR",
-                            Name = "Euronext Paris",
+                            MIC = "Euronext Paris",
                             Suffix = "PA"
                         },
                         new
                         {
                             Symbol = "XBRU",
-                            Name = "Euronext Brussels",
+                            MIC = "Euronext Brussels",
                             Suffix = "BR"
                         },
                         new
                         {
                             Symbol = "XLIS",
-                            Name = "Euronext Lisbon",
+                            MIC = "Euronext Lisbon",
                             Suffix = "LS"
                         },
                         new
                         {
                             Symbol = "XMIL",
-                            Name = "Borsa Italiana / Euronext Milan",
+                            MIC = "Borsa Italiana / Euronext Milan",
                             Suffix = "MI"
                         },
                         new
                         {
                             Symbol = "XSWX",
-                            Name = "SIX Swiss Exchange",
+                            MIC = "SIX Swiss Exchange",
                             Suffix = "SW"
                         },
                         new
                         {
                             Symbol = "XWAR",
-                            Name = "Warsaw Stock Exchange",
+                            MIC = "Warsaw Stock Exchange",
                             Suffix = "WA"
                         },
                         new
                         {
                             Symbol = "XSTO",
-                            Name = "Nasdaq Stockholm",
+                            MIC = "Nasdaq Stockholm",
                             Suffix = "ST"
                         },
                         new
                         {
                             Symbol = "XCSE",
-                            Name = "Nasdaq Copenhagen",
+                            MIC = "Nasdaq Copenhagen",
                             Suffix = "CO"
                         },
                         new
                         {
                             Symbol = "XHEL",
-                            Name = "Nasdaq Helsinki",
+                            MIC = "Nasdaq Helsinki",
                             Suffix = "HE"
                         },
                         new
                         {
                             Symbol = "XOSL",
-                            Name = "Oslo Børs",
+                            MIC = "Oslo Børs",
                             Suffix = "OL"
                         },
                         new
                         {
                             Symbol = "XWBO",
-                            Name = "Vienna Stock Exchange",
+                            MIC = "Vienna Stock Exchange",
                             Suffix = "VI"
                         },
                         new
                         {
                             Symbol = "XPRA",
-                            Name = "Prague Stock Exchange",
+                            MIC = "Prague Stock Exchange",
                             Suffix = "PR"
                         },
                         new
                         {
                             Symbol = "XBUD",
-                            Name = "Budapest Stock Exchange",
+                            MIC = "Budapest Stock Exchange",
                             Suffix = "BD"
                         },
                         new
                         {
                             Symbol = "XATH",
-                            Name = "Athens Stock Exchange",
+                            MIC = "Athens Stock Exchange",
                             Suffix = "AT"
                         },
                         new
                         {
                             Symbol = "XMAD",
-                            Name = "Madrid Stock Exchange",
+                            MIC = "Madrid Stock Exchange",
                             Suffix = "MC"
                         },
                         new
                         {
                             Symbol = "XIST",
-                            Name = "Borsa Istanbul",
+                            MIC = "Borsa Istanbul",
                             Suffix = "IS"
                         },
                         new
                         {
                             Symbol = "XNAS",
-                            Name = "Nasdaq US",
+                            MIC = "Nasdaq US",
                             Suffix = ""
                         },
                         new
                         {
                             Symbol = "XNYS",
-                            Name = "New York Stock Exchange",
+                            MIC = "New York Stock Exchange",
                             Suffix = ""
                         },
                         new
                         {
                             Symbol = "ARCX",
-                            Name = "NYSE Arca",
+                            MIC = "NYSE Arca",
                             Suffix = ""
                         },
                         new
                         {
                             Symbol = "XTSE",
-                            Name = "Toronto Stock Exchange",
+                            MIC = "Toronto Stock Exchange",
                             Suffix = "TO"
                         },
                         new
                         {
                             Symbol = "XTSX",
-                            Name = "TSX Venture Exchange",
+                            MIC = "TSX Venture Exchange",
                             Suffix = "V"
                         },
                         new
                         {
                             Symbol = "XASX",
-                            Name = "Australian Securities Exchange",
+                            MIC = "Australian Securities Exchange",
                             Suffix = "AX"
                         },
                         new
                         {
                             Symbol = "XTKS",
-                            Name = "Tokyo Stock Exchange",
+                            MIC = "Tokyo Stock Exchange",
                             Suffix = "T"
                         },
                         new
                         {
                             Symbol = "XHKG",
-                            Name = "Hong Kong Stock Exchange",
+                            MIC = "Hong Kong Stock Exchange",
                             Suffix = "HK"
                         },
                         new
                         {
                             Symbol = "XSES",
-                            Name = "Singapore Exchange",
+                            MIC = "Singapore Exchange",
                             Suffix = "SI"
                         },
                         new
                         {
                             Symbol = "XBOM",
-                            Name = "BSE India",
+                            MIC = "BSE India",
                             Suffix = "BO"
                         },
                         new
                         {
                             Symbol = "XSHG",
-                            Name = "Shanghai Stock Exchange",
+                            MIC = "Shanghai Stock Exchange",
                             Suffix = "SS"
                         },
                         new
                         {
                             Symbol = "XSHE",
-                            Name = "Shenzhen Stock Exchange",
+                            MIC = "Shenzhen Stock Exchange",
                             Suffix = "SZ"
                         });
                 });
@@ -308,6 +264,55 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.HasKey("Symbol", "Date");
 
                     b.ToTable("market_data", (string)null);
+                });
+
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Stock", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("MIC")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)");
+
+                    b.Property<decimal>("Quantity")
+                        .HasPrecision(18, 4)
+                        .HasColumnType("numeric(18,4)");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<int>("WalletId")
+                        .HasColumnType("integer");
+
+                    b.ComplexProperty<Dictionary<string, object>>("BuyingPrice", "FinancialPortfolio.Domain.Entities.Stock.BuyingPrice#Money", b1 =>
+                        {
+                            b1.Property<decimal>("Amount")
+                                .HasPrecision(18, 2)
+                                .HasColumnType("numeric(18,2)")
+                                .HasColumnName("BuyingPrice");
+
+                            b1.Property<string>("Currency")
+                                .IsRequired()
+                                .HasMaxLength(3)
+                                .HasColumnType("character varying(3)")
+                                .HasColumnName("Currency");
+                        });
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WalletId");
+
+                    b.ToTable("stocks", (string)null);
                 });
 
             modelBuilder.Entity("FinancialPortfolio.Domain.Entities.User", b =>
@@ -363,7 +368,7 @@ namespace FinancialPortfolio.Infrastructure.Migrations
                     b.ToTable("wallets", (string)null);
                 });
 
-            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Asset", b =>
+            modelBuilder.Entity("FinancialPortfolio.Domain.Entities.Stock", b =>
                 {
                     b.HasOne("FinancialPortfolio.Domain.Entities.Wallet", "Wallet")
                         .WithMany("Assets")

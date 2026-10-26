@@ -4,25 +4,29 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinancialPortfolio.Infrastructure.Context.Configurations
 {
-    public class AssetConfiguration : IEntityTypeConfiguration<Asset>
+    public class StockConfiguration : IEntityTypeConfiguration<Stock>
     {
-        public void Configure(EntityTypeBuilder<Asset> builder)
+        public void Configure(EntityTypeBuilder<Stock> builder)
         {
-            builder.ToTable("assets");
+            builder.ToTable("stocks");
 
-            builder.HasKey(a => a.Id);
+            builder.HasKey(s => s.Id);
 
-            builder.Property(a => a.Id).ValueGeneratedOnAdd();
+            builder.Property(s => s.Id).ValueGeneratedOnAdd();
 
-            builder.Property(a => a.Name)
+            builder.Property(s => s.Symbol)
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(a => a.Quantity)
+            builder.Property(s => s.MIC)
+                .HasMaxLength(4)
+                .IsRequired();
+
+            builder.Property(s => s.Quantity)
                 .HasPrecision(18, 4)
                 .IsRequired();
 
-            builder.ComplexProperty(a => a.BuyingPrice, price =>
+            builder.ComplexProperty(s => s.BuyingPrice, price =>
             {
                 price.Property(m => m.Amount)
                     .HasColumnName("BuyingPrice")
@@ -36,12 +40,12 @@ namespace FinancialPortfolio.Infrastructure.Context.Configurations
                     .IsRequired();
             }); //Can be chained from EF11
 
-            builder.Property(a => a.Timestamp)
+            builder.Property(s => s.Timestamp)
                 .HasDefaultValueSql("now()");
 
-            builder.HasOne(a => a.Wallet)
+            builder.HasOne(s => s.Wallet)
                 .WithMany(w => w.Assets)
-                .HasForeignKey(a => a.WalletId)
+                .HasForeignKey(s => s.WalletId)
                 .IsRequired();
         }
     }

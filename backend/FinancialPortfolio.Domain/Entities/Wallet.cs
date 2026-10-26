@@ -14,6 +14,6 @@ namespace FinancialPortfolio.Domain.Entities
 
         public User User { get; set; } = null!;
 
-        public ICollection<Asset> Assets { get; } = new List<Asset>();
+        public ICollection<Stock> Assets { get; } = new List<Stock>();
     }
 }

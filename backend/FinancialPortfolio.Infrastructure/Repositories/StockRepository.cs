@@ -1,5 +1,5 @@
 ﻿using FinancialPortfolio.Application.Abstractions;
-using FinancialPortfolio.Application.DTOs.Asset;
+using FinancialPortfolio.Application.DTOs.Stock;
 using FinancialPortfolio.Domain.Entities;
 using FinancialPortfolio.Domain.ValueObjects;
 using FinancialPortfolio.Infrastructure.Context;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinancialPortfolio.Infrastructure.Repositories
 {
-    internal class AssetRepository(DatabaseContext dbContext) : IAssetRepository
+    internal class StockRepository(DatabaseContext dbContext) : IStockRepository
     {
         public async Task<List<AssetGetResponseDto>> GetAsync(int walletId, CancellationToken token)
         {
@@ -16,7 +16,7 @@ namespace FinancialPortfolio.Infrastructure.Repositories
                 .Where(x => x.WalletId == walletId)
                 .Select(x => new AssetGetResponseDto(
                     x.Id,
-                    x.Name,
+                    x.Symbol,
                     x.Quantity,
                     x.BuyingPrice.Amount,
                     x.BuyingPrice.Currency,
@@ -24,17 +24,18 @@ namespace FinancialPortfolio.Infrastructure.Repositories
                 .ToListAsync(token);
         }
 
-        public async Task AddAsync(AssetAddRequestDto assetDto, CancellationToken token)
+        public async Task AddAsync(StockAddRequestDto stockDto, CancellationToken token)
         {
-            var asset = new Asset
+            var stock = new Stock
             {
-                WalletId = assetDto.WalletId,
-                Name = assetDto.Name,
-                Quantity = assetDto.Quantity,
-                BuyingPrice = new Money(assetDto.BuyingPrice, assetDto.Currency)
+                WalletId = stockDto.WalletId,
+                Symbol = stockDto.Symbol,
+                MIC = stockDto.MIC,
+                Quantity = stockDto.Quantity,
+                BuyingPrice = new Money(stockDto.BuyingPrice, stockDto.Currency)
             };
 
-            dbContext.Assets.Add(asset);
+            dbContext.Assets.Add(stock);
 
             await dbContext.SaveChangesAsync(token);
         }

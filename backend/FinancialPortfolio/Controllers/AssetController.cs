@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Application.DTOs.Asset;
+using FinancialPortfolio.Application.DTOs.Stock;
 using FinancialPortfolio.Application.Services.Asset;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,9 @@ namespace FinancialPortfolio.Presentation.Controllers
                 : HandleFailure(assetsResult);
         }
 
+        //Currently only stocks, future will be stocks, bonds, accounts
         [HttpPost("add")]
-        public async Task<IActionResult> Add([FromBody] AssetAddRequestDto request, CancellationToken token)
+        public async Task<IActionResult> Add([FromBody] StockAddRequestDto request, CancellationToken token)
         {
             var userIdResult = TryGetUserId();
             if (userIdResult.IsFailure) return HandleFailure(userIdResult);

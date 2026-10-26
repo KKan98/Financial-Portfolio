@@ -8,7 +8,7 @@ namespace FinancialPortfolio.Infrastructure.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Wallet> Wallets { get; set; }
-        public DbSet<Asset> Assets { get; set; }
+        public DbSet<Stock> Assets { get; set; }
         public DbSet<Exchange> Exchanges { get; set; }
         public DbSet<MarketData> MarketData { get; set; }
 

@@ -1,12 +1,12 @@
-﻿using FinancialPortfolio.Application.DTOs.Asset;
+﻿using FinancialPortfolio.Application.DTOs.Stock;
 
 namespace FinancialPortfolio.Application.Abstractions
 {
-    public interface IAssetRepository
+    public interface IStockRepository
     {
         Task<List<AssetGetResponseDto>> GetAsync(int walletId, CancellationToken token);
 
-        Task AddAsync(AssetAddRequestDto asset, CancellationToken token);
+        Task AddAsync(StockAddRequestDto stockDto, CancellationToken token);
 
         Task DeleteAsync(Guid assetId, CancellationToken token);
     }
