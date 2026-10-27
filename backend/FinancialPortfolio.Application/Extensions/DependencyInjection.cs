@@ -1,4 +1,5 @@
 ﻿using FinancialPortfolio.Application.Services.Asset;
+using FinancialPortfolio.Application.Services.Exchange;
 using FinancialPortfolio.Application.Services.Login;
 using FinancialPortfolio.Application.Services.MarketData;
 using FinancialPortfolio.Application.Services.SignUp;
@@ -17,6 +18,7 @@ namespace FinancialPortfolio.Application.Extensions
             services.AddScoped<IAssetService, AssetService>();
             services.AddScoped<IMarketDataService, MarketDataService>();
             services.AddScoped<IMarketDataService, MarketDataService>();
+            services.AddScoped<IExchangeService, ExchangeService>();
 
             return services;
         }

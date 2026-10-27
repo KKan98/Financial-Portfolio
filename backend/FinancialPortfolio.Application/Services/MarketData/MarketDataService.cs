@@ -20,7 +20,7 @@ namespace FinancialPortfolio.Application.Services.MarketData
 
             var marketDataResult= await GetFromDb(symbol, token);
 
-            if (marketDataResult.IsSuccess)
+            if (marketDataResult.IsSuccess) //Check if data is expired before returning
             {
                 return marketDataResult;
             }
@@ -29,7 +29,7 @@ namespace FinancialPortfolio.Application.Services.MarketData
 
             if (marketDataClientResult is { IsSuccess: true, Value: not null } )
             {
-                await AddMarketData(symbol, marketDataClientResult, token); // There needs to be expiration time for added data, meaning we can either add new if not new has been added in a week or there is none in db
+                await AddMarketData(symbol, marketDataClientResult, token);
             }
 
             return marketDataClientResult;

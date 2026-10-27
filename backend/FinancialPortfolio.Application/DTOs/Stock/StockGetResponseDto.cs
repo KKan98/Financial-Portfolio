@@ -5,7 +5,8 @@ namespace FinancialPortfolio.Application.DTOs.Stock
 {
     public record AssetGetResponseDto(
         Guid Id,
-        string Name,
+        string Symbol,
+        string MIC,
         decimal Quantity,
         decimal buyingPrice,
         [property: JsonConverter(typeof(JsonStringEnumConverter<Currency>))] Currency currency,

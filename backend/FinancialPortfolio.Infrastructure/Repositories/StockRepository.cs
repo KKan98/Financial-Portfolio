@@ -17,6 +17,7 @@ namespace FinancialPortfolio.Infrastructure.Repositories
                 .Select(x => new AssetGetResponseDto(
                     x.Id,
                     x.Symbol,
+                    x.MIC,
                     x.Quantity,
                     x.BuyingPrice.Amount,
                     x.BuyingPrice.Currency,
