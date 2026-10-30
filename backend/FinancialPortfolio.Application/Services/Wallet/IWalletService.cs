@@ -7,6 +7,6 @@ namespace FinancialPortfolio.Application.Services.Wallet
     {
         Task<List<WalletResponseDto>> GetAsync(int userId, CancellationToken token);
 
-        Task<Result> HandleAsync(int userId, string name, CancellationToken token);
+        Task<Result> AddAsync(int userId, string name, CancellationToken token);
     }
 }

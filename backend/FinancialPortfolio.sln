@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialPortfolio.Domain.T
 		{D92D48EF-FBB7-4DBC-91B0-AD896C2980D3} = {D92D48EF-FBB7-4DBC-91B0-AD896C2980D3}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialPortfolio.Application.Tests", "FinancialPortfolio.Application.Tests\FinancialPortfolio.Application.Tests.csproj", "{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,12 +56,17 @@ Global
 		{F02CC11C-E3CF-4A36-B7C4-9648BBF3EA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F02CC11C-E3CF-4A36-B7C4-9648BBF3EA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F02CC11C-E3CF-4A36-B7C4-9648BBF3EA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F02CC11C-E3CF-4A36-B7C4-9648BBF3EA88} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5A0033BA-31FA-4190-AE58-ADBB51DD9E8C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27A7ECDB-89FC-4137-8786-1383FAC25D83}

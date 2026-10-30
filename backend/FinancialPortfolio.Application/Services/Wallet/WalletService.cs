@@ -4,14 +4,14 @@ using FinancialPortfolio.Application.DTOs.Wallet;
 
 namespace FinancialPortfolio.Application.Services.Wallet
 {
-    internal class WalletService(IWalletRepository walletRepository) : IWalletService
+    public class WalletService(IWalletRepository walletRepository) : IWalletService
     {
         public Task<List<WalletResponseDto>> GetAsync(int userId, CancellationToken token)
         {
             return walletRepository.GetAsync(userId, token);
         }
 
-        public async Task<Result> HandleAsync(int userId, string name, CancellationToken token)
+        public async Task<Result> AddAsync(int userId, string name, CancellationToken token)
         {
             try
             {

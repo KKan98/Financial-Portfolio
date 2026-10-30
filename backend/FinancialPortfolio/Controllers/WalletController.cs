@@ -28,7 +28,7 @@ namespace FinancialPortfolio.Presentation.Controllers
             var userIdResult = TryGetUserId();
             if (userIdResult.IsFailure) return HandleFailure(userIdResult);
 
-            Result result = await walletService.HandleAsync(userIdResult.Value, dto.Name, token);
+            Result result = await walletService.AddAsync(userIdResult.Value, dto.Name, token);
 
             return result.IsSuccess
                 ? Ok()

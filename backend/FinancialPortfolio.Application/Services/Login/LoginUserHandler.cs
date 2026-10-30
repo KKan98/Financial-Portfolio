@@ -6,7 +6,7 @@ namespace FinancialPortfolio.Application.Services.Login
 {
     internal sealed class LoginUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IJwtService _jwtService) : ILoginUserHandler
     {
-        public async Task<Result<LoginResponseDto?>> HandleAsync(LoginRequestDto requestDto ,CancellationToken token)
+        public async Task<Result<LoginResponseDto?>> HandleAsync(LoginRequestDto requestDto, CancellationToken token)
         {
             var user = await userRepository.GetUserAsync(requestDto.Email, token);
 
