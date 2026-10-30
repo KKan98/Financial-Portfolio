@@ -11,7 +11,7 @@ namespace FinancialPortfolio.Domain.ValueObjects
 
         public Money(decimal amount, Currency currency)
         {
-            if (!Enum.IsDefined(currency))
+            if (!Enum.IsDefined(currency)) //result pattern?
             {
                 throw new ArgumentOutOfRangeException($"{currency} does not exist. Available currencies are: {string.Join(", ", Enum.GetValues<Currency>())}");
             }
@@ -22,7 +22,7 @@ namespace FinancialPortfolio.Domain.ValueObjects
             Currency = currency;
         }
 
-        private static void EnsureSameCurrency(Money left, Money right)
+        public static void EnsureSameCurrency(Money left, Money right)
         {
             if (left.Currency != right.Currency)
                 throw new InvalidOperationException($"Cannot operate on {left.Currency} and {right.Currency}");

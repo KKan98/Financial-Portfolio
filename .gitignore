@@ -10,3 +10,5 @@ backend/FinancialPortfolio.Domain/bin/
 backend/FinancialPortfolio.Domain/obj/
 backend/FinancialPortfolio.Infrastructure/bin/
 backend/FinancialPortfolio.Infrastructure/obj/
+backend/FinancialPortfolio.Domain.Tests/bin/
+backend/FinancialPortfolio.Domain.Tests/obj/

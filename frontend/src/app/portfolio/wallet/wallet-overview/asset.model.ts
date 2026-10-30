@@ -1,6 +1,7 @@
 export type Asset = {
   id: string,
-  name: string,
+  symbol: string,
+  mic: string,
   quantity: number,
   buyingPrice: number,
   currency: string,

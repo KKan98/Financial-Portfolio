@@ -21,7 +21,7 @@
         <tbody>
           @for (asset of assets(); track asset.id) {
             <tr>
-              <th scope="row">{{ asset.name }}</th>
+              <th scope="row">{{ asset.symbol }}</th>
               <td>{{ asset.quantity | number: '1.0-8' }}</td>
               <td>{{ asset.buyingPrice }}</td>
               <td>{{ asset.currency }}</td>
