@@ -4,7 +4,7 @@ using FinancialPortfolio.Application.DTOs.Login;
 
 namespace FinancialPortfolio.Application.Services.Login
 {
-    internal sealed class LoginUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IJwtService _jwtService) : ILoginUserHandler
+    public sealed class LoginUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher, IJwtService _jwtService) : ILoginUserHandler
     {
         public async Task<Result<LoginResponseDto?>> HandleAsync(LoginRequestDto requestDto, CancellationToken token)
         {

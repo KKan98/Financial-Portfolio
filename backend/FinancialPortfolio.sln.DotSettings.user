@@ -4,5 +4,6 @@
     &lt;TestId&gt;xUnit::F02CC11C-E3CF-4A36-B7C4-9648BBF3EA88::net8.0::FinancialPortfolio.Domain.Tests.ValueObjects.MoneyTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Wallet.WalletServiceTests.AddAsync_WalletAlreadyExists_ThrowResultFailureWithWalletAlreadyExistsException&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Wallet.WalletServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Login.LoginUserHandlerTests.HandleAsync_InvalidCredentials_ReturnInvalidCredentialsError&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

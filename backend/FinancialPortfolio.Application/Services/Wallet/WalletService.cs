@@ -6,9 +6,9 @@ namespace FinancialPortfolio.Application.Services.Wallet
 {
     public class WalletService(IWalletRepository walletRepository) : IWalletService
     {
-        public Task<List<WalletResponseDto>> GetAsync(int userId, CancellationToken token)
+        public async Task<Result<List<WalletResponseDto>>> GetAsync(int userId, CancellationToken token)
         {
-            return walletRepository.GetAsync(userId, token);
+            return await walletRepository.GetAsync(userId, token);
         }
 
         public async Task<Result> AddAsync(int userId, string name, CancellationToken token)
