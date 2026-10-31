@@ -9,31 +9,45 @@ namespace FinancialPortfolio.Application.Tests.Services.Login
 {
     public class LoginUserHandlerTests
     {
+        private readonly IUserRepository _repository;
+        private readonly IPasswordHasher _passwordHasher;
+        private readonly IJwtService _jwtService;
+        private readonly LoginUserHandler _handler;
+
+        public LoginUserHandlerTests()
+        {
+            _repository = Substitute.For<IUserRepository>();
+            _passwordHasher = Substitute.For<IPasswordHasher>();
+            _jwtService = Substitute.For<IJwtService>();
+            _handler = new LoginUserHandler(_repository, _passwordHasher, _jwtService);
+        }
+
         [Fact]
         public async Task HandleAsync_InvalidCredentials_ReturnInvalidCredentialsError()
         {
             var loginRequestDto = new LoginRequestDto("user1@email.com", "secretPassword");
-            var repository = Substitute.For<IUserRepository>();
-            var passwordHasher = Substitute.For<IPasswordHasher>();
-            var jwtService = Substitute.For<IJwtService>();
 
-            repository.GetUserAsync(loginRequestDto.Email, Arg.Any<CancellationToken>())
+            _repository.GetUserAsync(loginRequestDto.Email, Arg.Any<CancellationToken>())
                 .Returns((User?)null);
 
-            var service = new LoginUserHandler(repository, passwordHasher, jwtService);
 
-
-            var result = await service.HandleAsync(loginRequestDto, CancellationToken.None);
+            var result = await _handler.HandleAsync(loginRequestDto, CancellationToken.None);
 
             
             Assert.Equal(Errors.InvalidCredentials, result.Error!);
             Assert.True(result.IsFailure);
 
-            jwtService.DidNotReceive()
+            _jwtService.DidNotReceive()
                 .CreateJWT(Arg.Any<User>());
 
-            passwordHasher.Received(1)
+            _passwordHasher.Received(1)
                 .VerifyHashedPassword(IPasswordHasher.dummyHash, loginRequestDto.Password);
         }
+
+        //[Fact]
+        //public async Task HandleAsync_ValidCredentials_ReturnsLoginResponseDto()
+        //{
+
+        //}
     }
 }
