@@ -16,7 +16,7 @@ namespace FinancialPortfolio.Application.Common
         public static Error InvalidCredentials { get; } =
             new("InvalidCredentials", ErrorType.Unauthorized, "Invalid Credentials.");
 
-        public static Error UserNotFound { get; } = new("UserNotFound", ErrorType.NotFound, "User does not exist.");
+        public static Error UserAlreadyExists { get; } = new("UserAlreadyExists", ErrorType.Conflict, "User already exists.");
 
         public static Error MarketDataInvalidResponse { get; } = new("MarketDataInvalidResponse", ErrorType.Integration,
             "Market data returned invalid response.");

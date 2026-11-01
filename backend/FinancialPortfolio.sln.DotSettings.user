@@ -6,5 +6,7 @@
     &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Wallet.WalletServiceTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Login.LoginUserHandlerTests.HandleAsync_InvalidCredentials_ReturnInvalidCredentialsError&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.Login.LoginUserHandlerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.SignUp.RegisterUserHandlerTests.HandleAsync_UserAlreadyExists_ThrowsConflict&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::5A0033BA-31FA-4190-AE58-ADBB51DD9E8C::net8.0::FinancialPortfolio.Application.Tests.Services.SignUp.RegisterUserHandlerTests.HandleAsync_NewUser_ReturnsSuccess&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

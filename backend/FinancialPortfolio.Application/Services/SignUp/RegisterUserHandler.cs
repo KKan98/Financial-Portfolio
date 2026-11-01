@@ -6,13 +6,13 @@ using FinancialPortfolio.Domain.Enums;
 
 namespace FinancialPortfolio.Application.Services.SignUp
 {
-    internal sealed class RegisterUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) : IRegisterUserHandler
+    public sealed class RegisterUserHandler(IUserRepository userRepository, IPasswordHasher passwordHasher) : IRegisterUserHandler
     {
         public async Task<Result> HandleAsync(SignUpRequestDto requestDto, CancellationToken token)
         {
             bool doesUserExist = await userRepository.DoesUserExistAsync(requestDto.Email, token);
 
-            if (doesUserExist) return Result.Failure(Errors.UserNotFound);
+            if (doesUserExist) return Errors.UserAlreadyExists;
 
             string hashedPassword = passwordHasher.HashPassword(requestDto.Password);
 
